@@ -55,4 +55,8 @@ public class Employee {
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
+    public void merge(Employee employee) {
+        this.salary = employee.getSalary();
+    }
 }

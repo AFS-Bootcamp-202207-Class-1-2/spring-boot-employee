@@ -50,4 +50,11 @@ public class EmployeeRepository {
     }
 
 
+    public Employee updateEmployee(int id, Employee employee) {
+        Employee employeeToUpdate = findEmployeeById(id);
+        employeeToUpdate.merge(employee);
+        return employeeToUpdate;
+    }
+
+
 }
