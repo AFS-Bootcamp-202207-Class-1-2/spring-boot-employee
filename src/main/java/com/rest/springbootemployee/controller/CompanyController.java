@@ -4,6 +4,7 @@ import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class CompanyController {
     @GetMapping()
     public List<Company> getCompanies() {
         return companyRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Company getCompanyById(@PathVariable int id) {
+        return companyRepository.findById(id);
     }
 }
