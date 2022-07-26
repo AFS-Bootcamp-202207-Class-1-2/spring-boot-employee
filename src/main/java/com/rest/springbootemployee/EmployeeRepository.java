@@ -57,4 +57,9 @@ public class EmployeeRepository {
     }
 
 
+    public List<Employee> deleteEmployee(int id) {
+        Employee employeeToDelete = findEmployeeById(id);
+        employees.remove(employeeToDelete);
+        return employees;
+    }
 }
