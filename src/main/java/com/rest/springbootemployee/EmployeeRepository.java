@@ -62,4 +62,12 @@ public class EmployeeRepository {
         employees.remove(employeeToDelete);
         return employees;
     }
+
+    public List<Employee> findEmployeeByPage(int page, int pageSize) {
+        return employees.stream()
+                .skip((page - 1) * pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
+
+    }
 }
