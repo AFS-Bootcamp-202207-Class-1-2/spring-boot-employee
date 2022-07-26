@@ -34,4 +34,20 @@ public class EmployeeRepository {
                 .filter(employee -> employee.getGender().equals(gender))
                 .collect(Collectors.toList());
     }
+
+    public Employee addEmployee(Employee employee) {
+        employee.setId(generateNewId());
+        employees.add(employee);
+        return employee;
+    }
+
+    private int generateNewId() {
+        int maxId = employees.stream()
+                .mapToInt(Employee::getId)
+                .max()
+                .orElse(1);
+        return maxId + 1;
+    }
+
+
 }

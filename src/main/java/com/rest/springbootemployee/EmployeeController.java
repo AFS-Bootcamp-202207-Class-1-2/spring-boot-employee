@@ -1,6 +1,7 @@
 package com.rest.springbootemployee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -20,12 +21,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee findEmployeeById(@PathVariable int id){
+    public Employee findEmployeeById(@PathVariable int id) {
         return employeeRepository.findEmployeeById(id);
     }
 
     @GetMapping(params = "gender")
-    public List<Employee> findEmployeeByGender(@RequestParam String gender){
+    public List<Employee> findEmployeeByGender(@RequestParam String gender) {
         return employeeRepository.findEmployeeByGender(gender);
     }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee addEmployee(@RequestBody Employee employee) {
+        return employeeRepository.addEmployee(employee);
+    }
+
+
 }
