@@ -65,4 +65,9 @@ public class CompanyRepository {
         Company companyToUpdate = findById(id);
         companyToUpdate.merge(company);
     }
+
+    public void deleteCompanyById(int id) {
+        Company company = findById(id);
+        companies.remove(company);
+    }
 }
