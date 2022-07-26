@@ -2,6 +2,7 @@ package com.rest.springbootemployee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -26,5 +27,11 @@ public class EmployeeRepository {
                 .filter(employee -> employee.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException());
+    }
+
+    public List<Employee> findEmployeeByGender(String gender) {
+        return employees.stream()
+                .filter(employee -> employee.getGender().equals(gender))
+                .collect(Collectors.toList());
     }
 }
