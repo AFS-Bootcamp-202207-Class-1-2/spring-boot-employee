@@ -1,4 +1,4 @@
-package com.rest.springbootemployee;
+package com.rest.springbootemployee.exception;
 
 public class NotFoundException extends RuntimeException{
     @Override
