@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CompanyRepository {
@@ -47,5 +48,12 @@ public class CompanyRepository {
                 .findFirst()
                 .orElseThrow(NullPointerException::new)
                 .getEmployees();
+    }
+
+    public List<Company> findCompanyByPageAndPageSize(int page, int pageSize) {
+        return companies.stream()
+                .skip(page - 1)
+                .limit(pageSize)
+                .collect(Collectors.toList());
     }
 }
