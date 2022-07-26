@@ -4,6 +4,7 @@ import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.domain.Employee;
 import com.rest.springbootemployee.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +34,11 @@ public class CompanyController {
     @GetMapping(params = {"page", "pageSize"})
     public List<Company> getCompanyByPageAndPageSize(@RequestParam int page, @RequestParam int pageSize) {
         return companyRepository.findCompanyByPageAndPageSize(page, pageSize);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createCompany(@RequestBody Company company) {
+        companyRepository.createCompany(company);
     }
 }
