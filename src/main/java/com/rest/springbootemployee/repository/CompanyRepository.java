@@ -60,4 +60,9 @@ public class CompanyRepository {
     public void createCompany(Company company) {
         companies.add(company);
     }
+
+    public void updateCompanyById(int id, Company company) {
+        Company companyToUpdate = findById(id);
+        companyToUpdate.merge(company);
+    }
 }

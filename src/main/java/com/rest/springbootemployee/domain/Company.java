@@ -39,4 +39,8 @@ public class Company {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+    public void merge(Company company) {
+        this.name = company.getName();
+    }
 }
