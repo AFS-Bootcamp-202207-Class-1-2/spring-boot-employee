@@ -45,5 +45,7 @@ public class Company {
 
     public void merge(Company company) {
         this.name = company.getName();
+        this.employees.clear();
+        this.employees.addAll(company.getEmployees());
     }
 }
