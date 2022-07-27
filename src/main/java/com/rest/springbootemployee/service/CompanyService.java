@@ -1,6 +1,7 @@
 package com.rest.springbootemployee.service;
 
 import com.rest.springbootemployee.domain.Company;
+import com.rest.springbootemployee.domain.Employee;
 import com.rest.springbootemployee.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,9 @@ public class CompanyService {
 
     public Company findById(int id) {
         return companyRepository.findById(id);
+    }
+
+    public List<Employee> findEmployeesUnderCertainCompany(int id) {
+        return companyRepository.findEmployeesUnderCertainCompany(id);
     }
 }
