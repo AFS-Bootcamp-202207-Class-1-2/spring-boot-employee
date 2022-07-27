@@ -75,4 +75,17 @@ public class EmployeeServiceTest {
         assertThat(employeesByGender.get(0), equalTo(employeeA));
         assertThat(employeesByGender.get(1), equalTo(employeeC));
     }
+
+    @Test
+    public void should_return_employee_when_add_given_employee() {
+        //given
+        Employee employee = new Employee(1, "A", 21, "male", 8000);
+        given(employeeRepository.addEmployee(employee)).willReturn(employee);
+
+        //when
+        Employee employeeNew = employeeService.addEmployee(employee);
+
+        //then
+        assertThat(employeeNew, equalTo(employee));
+    }
 }
