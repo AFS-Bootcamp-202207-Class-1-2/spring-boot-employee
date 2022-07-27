@@ -72,4 +72,8 @@ public class EmployeeRepository {
                 .collect(Collectors.toList());
 
     }
+
+    public void clearAll() {
+        employees.removeAll(employees);
+    }
 }
