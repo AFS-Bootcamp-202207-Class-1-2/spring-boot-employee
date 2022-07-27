@@ -41,7 +41,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public Employee getEmployeesByPage(@PathVariable int id, @RequestBody Employee employee) {
+    public Employee updateEmployeesById(@PathVariable int id, @RequestBody Employee employee) {
         return employeeRepository.updateEmployee(id, employee);
     }
 
@@ -53,6 +53,6 @@ public class EmployeeController {
 
     @GetMapping(params = {"page", "pageSize"})
     public List<Employee> getEmployeesByPage(@RequestParam int page, @RequestParam int pageSize) {
-        return employeeRepository.findEmployeeByPage(page, pageSize);
+        return employeeService.findEmployeeByPage(page, pageSize);
     }
 }
