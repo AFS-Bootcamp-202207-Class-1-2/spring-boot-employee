@@ -23,7 +23,7 @@ public class CompanyRepository {
         companies.add(new Company(2, "google", new ArrayList<>(Arrays.asList(
                 new Employee(3, "li", 20, "female", 8000),
                 new Employee(4, "qian", 21, "male", 7989)))));
-        companies.add(new Company(2, "google", new ArrayList<>(Arrays.asList(
+        companies.add(new Company(3, "apple", new ArrayList<>(Arrays.asList(
                 new Employee(5, "xing", 23, "female", 9000),
                 new Employee(6, "liang", 22, "female", 10000)))));
 
