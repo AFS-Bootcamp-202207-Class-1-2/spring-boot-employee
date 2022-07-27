@@ -20,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 public class CompanyServiceTest {
@@ -117,5 +118,21 @@ public class CompanyServiceTest {
         assertThat(newCompany.getName(), equalTo(company.getName()));
         assertThat(newCompany.getEmployees().get(0).getName(), equalTo(company.getEmployees().get(0).getName()));
 
+    }
+
+    @Test
+    void should_return_company_when_update_given_company_and_id() {
+        int id = 1;
+        Company originCompany = new Company(id, "google", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000), new Employee(6, "liang", 22, "female", 10000))));
+        Company updateCompany = new Company(id, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000), new Employee(6, "liang", 22, "female", 10000))));
+
+        given(companyRepository.findById(id)).willReturn(originCompany);
+        given(companyRepository.updateCompanyById(id, updateCompany)).willCallRealMethod();
+
+        //when
+        companyService.updateCompanyById(id, updateCompany);
+
+        //then
+        verify(companyRepository).updateCompanyById(id, updateCompany);
     }
 }

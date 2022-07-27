@@ -34,4 +34,8 @@ public class CompanyService {
     public Company createCompany(Company company) {
         return companyRepository.createCompany(company);
     }
+
+    public Company updateCompanyById(int id, Company updateCompany) {
+        return companyRepository.updateCompanyById(id, updateCompany);
+    }
 }
