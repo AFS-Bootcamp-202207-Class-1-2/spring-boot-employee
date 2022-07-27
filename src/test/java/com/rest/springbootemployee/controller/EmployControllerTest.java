@@ -80,4 +80,36 @@ public class EmployControllerTest {
         assertThat(employees.get(0).getSalary(), equalTo(6000));
     }
 
+    @Test
+    void should_update_employee_when_perform_put_given_new_employee_and_id() throws Exception {
+        //given
+        List<Employee> employees = employeeRepository.findAll();
+        employees.add(new Employee(1, "Lisa", 21, "female", 6000));
+        int id = 1;
+        String newEmployee = "{\n" +
+                "            \"id\": 1,\n" +
+                "            \"name\": \"li\",\n" +
+                "            \"age\": 20,\n" +
+                "            \"gender\": \"female\",\n" +
+                "            \"salary\": 5000\n" +
+                "        }";
+        //when & then
+        client.perform(MockMvcRequestBuilders.put("/employees/" + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newEmployee))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Lisa"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(21))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value("female"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(5000));
+
+        //then
+
+        assertThat(employees, hasSize(1));
+        assertThat(employees.get(0).getName(), equalTo("Lisa"));
+        assertThat(employees.get(0).getAge(), equalTo(21));
+        assertThat(employees.get(0).getGender(), equalTo("female"));
+        assertThat(employees.get(0).getSalary(), equalTo(5000));
+    }
+
 }

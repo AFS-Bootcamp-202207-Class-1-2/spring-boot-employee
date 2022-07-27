@@ -57,7 +57,6 @@ public class Employee {
     }
 
     public void merge(Employee employee) {
-        System.out.println(employee.getSalary());
         this.salary = employee.getSalary();
     }
 

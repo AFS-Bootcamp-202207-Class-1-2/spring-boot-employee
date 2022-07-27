@@ -38,8 +38,6 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     public Employee getEmployeesByPage(@PathVariable int id, @RequestBody Employee employee) {
-        System.out.println("ssdff");
-        System.out.println(employee);
         return employeeRepository.updateEmployee(id, employee);
     }
 
