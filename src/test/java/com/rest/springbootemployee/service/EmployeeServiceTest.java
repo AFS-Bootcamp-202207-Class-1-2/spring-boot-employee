@@ -134,16 +134,13 @@ public class EmployeeServiceTest {
         Employee employee = new Employee(id, "A", 21, "male", 8000);
         Employee updateEmployee = new Employee(id, "A", 21, "male", 10000);
 
-        given(employeeRepository.findAll()).willCallRealMethod();
-        given(employeeRepository.updateEmployee(id, updateEmployee)).willCallRealMethod();
-        List<Employee> employees = employeeService.findAll();
-        employees.add(employee);
+        employeeService.addEmployee(employee);
 
         //when
         Employee updatedEmployee = employeeService.updateEmployee(id, updateEmployee);
 
         //then
-//        verify(employeeRepository).updateEmployee(1, updateEmployee);
+        verify(employeeRepository).updateEmployee(1, updateEmployee);
         assertThat(updatedEmployee.getSalary(), equalTo(updateEmployee.getSalary()));
     }
 
