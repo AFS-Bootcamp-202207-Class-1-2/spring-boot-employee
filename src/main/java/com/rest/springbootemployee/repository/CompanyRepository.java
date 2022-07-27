@@ -39,8 +39,10 @@ public class CompanyRepository {
         return companies.stream().skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
     }
 
-    public void createCompany(Company company) {
+    public Company createCompany(Company company) {
+        company.setId(generateId());
         companies.add(company);
+        return company;
     }
 
     public void updateCompanyById(int id, Company company) {
