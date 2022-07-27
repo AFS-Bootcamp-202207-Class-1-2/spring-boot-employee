@@ -112,4 +112,19 @@ public class EmployControllerTest {
         assertThat(employees.get(0).getSalary(), equalTo(5000));
     }
 
+    @Test
+    void should_delete_employee_when_perform_put_given_new_employee_and_id() throws Exception {
+        //given
+        List<Employee> employees = employeeRepository.findAll();
+        employees.add(new Employee(1, "Lisa", 21, "female", 6000));
+        int id = 1;
+        //when & then
+        client.perform(MockMvcRequestBuilders.delete("/employees/" + id))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+        assertThat(employees, hasSize(0));
+
+    }
+
+
 }
