@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -23,7 +24,8 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(SpringExtension.class)
 public class CompanyServiceTest {
 
-    @Spy
+//    @Spy
+    @Mock
     CompanyRepository companyRepository;
 
     @InjectMocks
@@ -48,5 +50,19 @@ public class CompanyServiceTest {
         //then
         assertThat(actualCompanies, hasSize(1));
         assertThat(actualCompanies.get(0), equalTo(company));
+    }
+
+    @Test
+    void should_return_company_when_find_given_id() {
+        int id = 1;
+        Company company = new Company(id, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532))));
+
+        given(companyRepository.findById(id)).willReturn(company);
+
+        //when
+        Company actualCompany = companyService.findById(id);
+
+        //then
+        assertThat(actualCompany.getId(), equalTo(id));
     }
 }
