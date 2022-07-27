@@ -53,9 +53,9 @@ public class EmployeeServiceTest {
     @Test
     public void should_return_employee_when_find_given_id() {
         //given
-        Employee employee = new Employee(1, "A", 21, "male", 8000);
         int id = 1;
-        given(employeeRepository.findEmployeeById(id)).willReturn(employee);
+        Employee employee = new Employee(id, "A", 21, "male", 8000);
+        employeeRepository.addEmployee(employee);
 
         //when
         Employee employeeById = employeeService.findEmployeeById(id);
