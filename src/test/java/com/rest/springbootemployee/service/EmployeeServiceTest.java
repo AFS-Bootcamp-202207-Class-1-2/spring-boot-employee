@@ -118,4 +118,31 @@ public class EmployeeServiceTest {
     }
 
 
+//    @Test
+//    public void should_return_employee_by_page_when_get_given_page_pageSize() {
+//        //given
+//        Employee employeeA = new Employee(1, "A", 21, "male", 8000);
+//        Employee employeeB = new Employee(1, "A", 21, "female", 8000);
+//        Employee employeeC = new Employee(1, "A", 21, "male", 8000);
+//        List<Employee> employees = new ArrayList<>();
+//        employees.add(employeeA);
+//        employees.add(employeeB);
+//        employees.add(employeeC);
+//
+//        List<Employee> employeesByPage = new ArrayList<>();
+//        employeesByPage.add(employeeA);
+//        employeesByPage.add(employeeB);
+//        int page = 1;
+//        int pageSize = 1;
+//
+//        given(employeeRepository.findEmployeeByPage(page, pageSize)).willReturn(employeesByPage);
+//
+//        //when
+//        List<Employee> actualEmployeesByPage = employeeService.findEmployeeByPage(page, pageSize);
+//
+//        //then
+//        assertThat(actualEmployeesByPage.get(0), equalTo(employeeA));
+//        assertThat(actualEmployeesByPage.get(1), equalTo(employeeB));
+//    }
+
 }

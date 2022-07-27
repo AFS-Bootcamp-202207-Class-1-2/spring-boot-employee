@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -98,4 +99,45 @@ public class CompanyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].employees[0].salary").value(2532));
 
     }
+
+    @Test
+    void should_add_companies_when_perform_post_given_page_and_page_size() throws Exception {
+        //given
+        companyRepository.createCompany(new Company(1, "huawei",
+                new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532)))));
+
+        String company = "{\n" +
+                "        \"id\": 1,\n" +
+                "        \"name\": \"oracle\",\n" +
+                "        \"employees\": [\n" +
+                "            {\n" +
+                "                \"id\": 5,\n" +
+                "                \"name\": \"xing\",\n" +
+                "                \"age\": 23,\n" +
+                "                \"gender\": \"female\",\n" +
+                "                \"salary\": 9000\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"id\": 6,\n" +
+                "                \"name\": \"liang\",\n" +
+                "                \"age\": 22,\n" +
+                "                \"gender\": \"female\",\n" +
+                "                \"salary\": 10000\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    }";
+        //when & then
+        client.perform(MockMvcRequestBuilders.post("/companies")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(company))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("oracle"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].name").value("xing"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].gender").value("female"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].salary").value(9000));
+
+    }
+
+
 }
