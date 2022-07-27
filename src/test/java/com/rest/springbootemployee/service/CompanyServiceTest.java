@@ -3,7 +3,6 @@ package com.rest.springbootemployee.service;
 import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.domain.Employee;
 import com.rest.springbootemployee.repository.CompanyRepository;
-import com.rest.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,12 +24,14 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(SpringExtension.class)
 public class CompanyServiceTest {
 
-//    @Spy
+
     @Mock
+//    @Spy
     CompanyRepository companyRepository;
 
     @InjectMocks
     CompanyService companyService;
+
 
     @BeforeEach
     void clear(){
@@ -134,5 +135,17 @@ public class CompanyServiceTest {
 
         //then
         verify(companyRepository).updateCompanyById(id, updateCompany);
+    }
+
+    @Test
+    void should_return_no_content_when_delete_given_id() {
+        //given
+        int id = 1;
+
+        //when
+        companyService.deleteCompanyById(id);
+
+        //then
+        verify(companyRepository).deleteCompanyById(id);
     }
 }
