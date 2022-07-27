@@ -47,7 +47,7 @@ public class EmployeeRepository {
         int maxId = employees.stream()
                 .mapToInt(Employee::getId)
                 .max()
-                .orElse(1);
+                .orElse(0);
         return maxId + 1;
     }
 

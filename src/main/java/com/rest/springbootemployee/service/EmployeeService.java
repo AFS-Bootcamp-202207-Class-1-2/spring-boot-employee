@@ -29,12 +29,18 @@ public class EmployeeService {
     }
 
     public Employee addEmployee(Employee employee) {
-//        employee.setAge(employee.getAge()+1);
-//        Employee employee1 = new Employee();
         return employeeRepository.addEmployee(employee);
     }
 
     public List<Employee> findEmployeeByPage(int page, int pageSize) {
         return employeeRepository.findEmployeeByPage(page, pageSize);
+    }
+
+    public Employee updateEmployee(int id, Employee updateEmployee) {
+        return employeeRepository.updateEmployee(id, updateEmployee);
+    }
+
+    public void deleteEmployee(int id) {
+        employeeRepository.deleteEmployee(id);
     }
 }
