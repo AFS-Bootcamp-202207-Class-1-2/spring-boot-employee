@@ -56,6 +56,10 @@ public class CompanyRepository {
     }
 
     public int generateId() {
-        return companies.stream().mapToInt(company -> company.getId()).max().getAsInt();
+       return companies.stream().mapToInt(company -> company.getId()).max().orElse(1);
+    }
+
+    public void clearAll() {
+        companies.removeAll(companies);
     }
 }
