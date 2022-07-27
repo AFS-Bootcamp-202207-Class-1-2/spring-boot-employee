@@ -45,9 +45,10 @@ public class CompanyRepository {
         return company;
     }
 
-    public void updateCompanyById(int id, Company company) {
+    public Company updateCompanyById(int id, Company company) {
         Company companyToUpdate = findById(id);
         companyToUpdate.merge(company);
+        return companyToUpdate;
     }
 
     public void deleteCompanyById(int id) {

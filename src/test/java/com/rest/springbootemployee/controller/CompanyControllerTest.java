@@ -103,9 +103,6 @@ public class CompanyControllerTest {
     @Test
     void should_add_companies_when_perform_post_given_page_and_page_size() throws Exception {
         //given
-        companyRepository.createCompany(new Company(1, "huawei",
-                new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532)))));
-
         String company = "{\n" +
                 "        \"id\": 1,\n" +
                 "        \"name\": \"oracle\",\n" +
@@ -136,8 +133,6 @@ public class CompanyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].name").value("xing"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].gender").value("female"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].salary").value(9000));
-
     }
-
 
 }
