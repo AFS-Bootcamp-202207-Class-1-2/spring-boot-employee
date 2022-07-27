@@ -79,6 +79,6 @@ public class CompanyServiceTest {
         List<Employee> actualEmployees = companyService.findEmployeesUnderCertainCompany(id);
 
         //then
-        assertThat(actualEmployees.get(0).getName(), equalTo("zhangsan"));
+        assertThat(actualEmployees.get(0).getName(), equalTo(employees.get(0).getName()));
     }
 }
