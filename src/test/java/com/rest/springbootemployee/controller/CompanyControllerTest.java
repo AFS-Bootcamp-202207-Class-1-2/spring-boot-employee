@@ -16,7 +16,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -177,5 +179,22 @@ public class CompanyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].name").value("xing"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].gender").value("female"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].salary").value(9000));
+    }
+
+    @Test
+    void should_delete_company_when_perform_delete_given_id() throws Exception {
+        //given
+        List<Company> companies = companyRepository.findAll();
+        int id = 1;
+        Company company = new Company(id, "oracle", new ArrayList<>(Arrays.asList(
+                new Employee(6, "liang", 22, "female", 10000)
+        )));
+        companies.add(company);
+        //when & then
+        client.perform(MockMvcRequestBuilders.delete("/companies/{id}", id))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+        assertThat(companies, hasSize(0));
+
     }
 }
