@@ -40,4 +40,19 @@ public class EmployeeServiceTest {
         assertThat(actualEmployees, hasSize(1));
         assertThat(actualEmployees.get(0), equalTo(employee));
     }
+
+    @Test
+    public void should_return_employee_when_find_given_id() {
+        //given
+        Employee employee = new Employee(1, "A", 21, "male", 8000);
+        int id = 1;
+        given(employeeRepository.findEmployeeById(id)).willReturn(employee);
+
+        //when
+        Employee employeeById = employeeService.findEmployeeById(id);
+
+        //then
+        assertThat(employeeById, equalTo(employee));
+    }
+
 }
