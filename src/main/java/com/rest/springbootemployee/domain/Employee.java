@@ -57,6 +57,18 @@ public class Employee {
     }
 
     public void merge(Employee employee) {
+        System.out.println(employee.getSalary());
         this.salary = employee.getSalary();
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", salary=" + salary +
+                '}';
     }
 }

@@ -37,7 +37,9 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+    public Employee getEmployeesByPage(@PathVariable int id, @RequestBody Employee employee) {
+        System.out.println("ssdff");
+        System.out.println(employee);
         return employeeRepository.updateEmployee(id, employee);
     }
 
@@ -48,7 +50,7 @@ public class EmployeeController {
     }
 
     @GetMapping(params = {"page", "pageSize"})
-    public List<Employee> updateEmployee(@RequestParam int page, @RequestParam int pageSize) {
+    public List<Employee> getEmployeesByPage(@RequestParam int page, @RequestParam int pageSize) {
         return employeeRepository.findEmployeeByPage(page, pageSize);
     }
 }
