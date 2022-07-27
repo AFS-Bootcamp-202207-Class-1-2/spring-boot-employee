@@ -14,9 +14,6 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
     private EmployeeService employeeService;
 
     @GetMapping()
@@ -42,13 +39,13 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     public Employee updateEmployeesById(@PathVariable int id, @RequestBody Employee employee) {
-        return employeeRepository.updateEmployee(id, employee);
+        return employeeService.updateEmployee(id, employee);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable int id) {
-        employeeRepository.deleteEmployee(id);
+        employeeService.deleteEmployee(id);
     }
 
     @GetMapping(params = {"page", "pageSize"})
