@@ -30,4 +30,8 @@ public class CompanyService {
     public List<Company> findCompanyByPageAndPageSize(int page, int pageSize) {
         return companyRepository.findCompanyByPageAndPageSize(page, pageSize);
     }
+
+    public Company createCompany(Company company) {
+        return companyRepository.createCompany(company);
+    }
 }
