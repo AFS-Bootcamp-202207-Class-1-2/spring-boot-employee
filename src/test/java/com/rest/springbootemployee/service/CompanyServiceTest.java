@@ -81,4 +81,24 @@ public class CompanyServiceTest {
         //then
         assertThat(actualEmployees.get(0).getName(), equalTo(employees.get(0).getName()));
     }
+
+    @Test
+    void should_return_companies_when_find_given_page_and_page_size() {
+        int page = 1;
+        int pageSize = 1;
+
+        List<Company> companies = new ArrayList<>();
+        companies.add(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "huang", 23, "male", 8000), new Employee(2, "zhang", 26, "male", 15005)))));
+        companies.add(new Company(2, "google", new ArrayList<>(Arrays.asList(new Employee(3, "li", 20, "female", 8000), new Employee(4, "qian", 21, "male", 7989)))));
+        companies.add(new Company(3, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000), new Employee(6, "liang", 22, "female", 10000)))));
+
+        given(companyRepository.findCompanyByPageAndPageSize(page, pageSize)).willReturn(companies);
+
+        //when
+        List<Company> actualCompanies = companyService.findCompanyByPageAndPageSize(page, pageSize);
+
+        //then
+        assertThat(actualCompanies.get(0).getName(), equalTo(companies.get(0).getName()));
+
+    }
 }
