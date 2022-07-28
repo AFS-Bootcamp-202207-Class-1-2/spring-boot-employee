@@ -47,10 +47,11 @@ public class CompanyService {
         return companyRepository.save(company);
     }
 
-//    public Company updateCompanyById(int id, Company updateCompany) {
-//        return companyRepository.updateCompanyById(id, updateCompany);
-//    }
-//
+    public Company updateCompanyById(int id, Company updateCompany) {
+        companyRepository.findById(id);
+        return companyRepository.save(updateCompany);
+    }
+
 //    public void deleteCompanyById(int id) {
 //        companyRepository.deleteCompanyById(id);
 //    }

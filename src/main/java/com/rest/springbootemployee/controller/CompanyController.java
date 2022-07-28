@@ -43,10 +43,10 @@ public class CompanyController {
         return companyService.createCompany(company);
     }
 
-//    @PutMapping("/{id}")
-//    public Company updateCompany(@PathVariable int id, @RequestBody Company company) {
-//        return companyService.updateCompanyById(id, company);
-//    }
+    @PutMapping("/{id}")
+    public Company updateCompany(@PathVariable int id, @RequestBody Company company) {
+        return companyService.updateCompanyById(id, company);
+    }
 //
 //    @DeleteMapping("/{id}")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
