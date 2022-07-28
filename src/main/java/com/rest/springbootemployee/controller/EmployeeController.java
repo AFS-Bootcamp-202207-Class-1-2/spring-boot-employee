@@ -41,13 +41,13 @@ public class EmployeeController {
     public Employee updateEmployeesById(@RequestBody Employee employee) {
         return employeeService.updateEmployee(employee);
     }
-//
-//    @DeleteMapping("/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteEmployee(@PathVariable int id) {
-//        employeeService.deleteEmployee(id);
-//    }
-//
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable int id) {
+        employeeService.deleteEmployee(id);
+    }
+
     @GetMapping(params = {"page", "pageSize"})
     public List<Employee> getEmployeesByPage(@RequestParam int page, @RequestParam int pageSize) {
         return employeeService.findEmployeeByPage(page, pageSize);

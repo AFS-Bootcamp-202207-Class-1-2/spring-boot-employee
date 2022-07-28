@@ -115,20 +115,19 @@ public class EmployControllerTest {
         assertThat(employeeService.findAll().get(0).getGender(), equalTo("female"));
         assertThat(employeeService.findAll().get(0).getSalary(), equalTo(5000));
     }
-//
-//    @Test
-//    void should_delete_employee_when_perform_put_given_new_employee_and_id() throws Exception {
-//        //given
-//        List<Employee> employees = employeeService.findAll();
-//        employees.add(new Employee(1, "Lisa", 21, "female", 6000));
-//        int id = 1;
-//        //when & then
-//        client.perform(MockMvcRequestBuilders.delete("/employees/" + id))
-//                .andExpect(MockMvcResultMatchers.status().isNoContent());
-//
-//        assertThat(employees, hasSize(0));
-//
-//    }
+
+    @Test
+    void should_delete_employee_when_perform_put_given_new_employee_and_id() throws Exception {
+        //given
+        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000));
+        int id = employee.getId();
+        //when & then
+        client.perform(MockMvcRequestBuilders.delete("/employees/" + id))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+        assertThat(employeeService.findAll(), hasSize(0));
+
+    }
 //
 //    @Test
 //    void should_get_employees_by_page_when_perform_put_given_page_and_page_size() throws Exception {
