@@ -42,6 +42,7 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee updateEmployee) {
+        findEmployeeById(updateEmployee.getId());
         return employeeRepository.save(updateEmployee);
     }
 
