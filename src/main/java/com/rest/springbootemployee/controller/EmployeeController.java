@@ -48,8 +48,8 @@ public class EmployeeController {
 //        employeeService.deleteEmployee(id);
 //    }
 //
-//    @GetMapping(params = {"page", "pageSize"})
-//    public List<Employee> getEmployeesByPage(@RequestParam int page, @RequestParam int pageSize) {
-//        return employeeService.findEmployeeByPage(page, pageSize);
-//    }
+    @GetMapping(params = {"page", "pageSize"})
+    public List<Employee> getEmployeesByPage(@RequestParam int page, @RequestParam int pageSize) {
+        return employeeService.findEmployeeByPage(page, pageSize);
+    }
 }

@@ -5,6 +5,8 @@ import com.rest.springbootemployee.exception.NotFoundException;
 import com.rest.springbootemployee.repository.EmployeeRepository;
 import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.PushBuilder;
@@ -38,11 +40,12 @@ public class EmployeeService {
     public Employee addEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
-//
-//    public List<Employee> findEmployeeByPage(int page, int pageSize) {
-//        return employeeRepository.findEmployeeByPage(page, pageSize);
-//    }
-//
+
+    public List<Employee> findEmployeeByPage(int page, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(page, pageSize);
+        return employeeRepository.findByPageAndPageSize(pageRequest).toList();
+    }
+
     public Employee updateEmployee(Employee updateEmployee) {
         return employeeRepository.save(updateEmployee);
     }
