@@ -14,7 +14,4 @@ public interface JpaEmployeeRepository extends JpaRepository<Employee, Integer> 
 
     Employee save(Employee employee);
 
-
-
-
 }

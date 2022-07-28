@@ -21,35 +21,35 @@ public class EmployeeController {
         return employeeService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Employee findEmployeeById(@PathVariable int id) {
-        return employeeService.findEmployeeById(id);
-    }
-
-    @GetMapping(params = "gender")
-    public List<Employee> findEmployeeByGender(@RequestParam String gender) {
-        return employeeService.findEmployeesByGender(gender);
-    }
-
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return employeeService.addEmployee(employee);
-    }
-
-    @PutMapping("/{id}")
-    public Employee updateEmployeesById(@PathVariable int id, @RequestBody Employee employee) {
-        return employeeService.updateEmployee(id, employee);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteEmployee(@PathVariable int id) {
-        employeeService.deleteEmployee(id);
-    }
-
-    @GetMapping(params = {"page", "pageSize"})
-    public List<Employee> getEmployeesByPage(@RequestParam int page, @RequestParam int pageSize) {
-        return employeeService.findEmployeeByPage(page, pageSize);
-    }
+//    @GetMapping("/{id}")
+//    public Employee findEmployeeById(@PathVariable int id) {
+//        return employeeService.findEmployeeById(id);
+//    }
+//
+//    @GetMapping(params = "gender")
+//    public List<Employee> findEmployeeByGender(@RequestParam String gender) {
+//        return employeeService.findEmployeesByGender(gender);
+//    }
+//
+//    @PostMapping()
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Employee addEmployee(@RequestBody Employee employee) {
+//        return employeeService.addEmployee(employee);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public Employee updateEmployeesById(@PathVariable int id, @RequestBody Employee employee) {
+//        return employeeService.updateEmployee(id, employee);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void deleteEmployee(@PathVariable int id) {
+//        employeeService.deleteEmployee(id);
+//    }
+//
+//    @GetMapping(params = {"page", "pageSize"})
+//    public List<Employee> getEmployeesByPage(@RequestParam int page, @RequestParam int pageSize) {
+//        return employeeService.findEmployeeByPage(page, pageSize);
+//    }
 }
