@@ -146,18 +146,17 @@ public class EmployeeServiceTest {
         verify(jpaEmployeeRepository).save(updateEmployee);
         assertThat(updatedEmployee.getSalary(), equalTo(updateEmployee.getSalary()));
     }
-//
-//    @Test
-//    public void should_return_no_content_when_delete_given_id() {
-//        //given
-//        Employee employee = new Employee(1, "A", 21, "male", 8001);
-//        employeeService.addEmployee(employee);
-//
-//        //when
-//        employeeService.deleteEmployee(1);
-//
-//        //then
-//        verify(jpaEmployeeRepository).deleteEmployee(1);
-//    }
+
+    @Test
+    public void should_return_no_content_when_delete_given_id() {
+        //given
+        int id = 1;
+
+        //when
+        employeeService.deleteEmployee(id);
+
+        //then
+        verify(jpaEmployeeRepository).deleteById(id);
+    }
 
 }
