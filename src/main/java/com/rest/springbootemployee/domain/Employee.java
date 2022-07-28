@@ -1,11 +1,23 @@
 package com.rest.springbootemployee.domain;
 
+import javax.persistence.*;
 
+@Entity
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "age")
     private int age;
+
+    @Column(name = "gender")
     private String gender;
+
+    @Column(name = "salary")
     private int salary;
 
     public Employee(int id, String name, int age, String gender, int salary) {
