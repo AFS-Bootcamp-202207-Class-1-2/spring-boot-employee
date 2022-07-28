@@ -54,19 +54,19 @@ public class CompanyServiceTest {
         assertThat(actualCompanies.get(0), equalTo(company));
     }
 
-//    @Test
-//    void should_return_company_when_find_given_id() {
-//        int id = 1;
-//        Company company = new Company(id, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1))));
-//
-//        given(companyRepository.findById(id)).willReturn(company);
-//
-//        //when
-//        Company actualCompany = companyService.findById(id);
-//
-//        //then
-//        assertThat(actualCompany.getId(), equalTo(id));
-//    }
+    @Test
+    void should_return_company_when_find_given_id() {
+        int id = 1;
+        Company company = new Company(id, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1))));
+
+        given(companyRepository.findById(id)).willReturn(company);
+
+        //when
+        Company actualCompany = companyService.findById(id);
+
+        //then
+        assertThat(actualCompany.getId(), equalTo(id));
+    }
 //
 //    @Test
 //    void should_return_employees_under_certain_company_when_find_given_id() {

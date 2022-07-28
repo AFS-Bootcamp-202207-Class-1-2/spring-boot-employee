@@ -2,12 +2,14 @@ package com.rest.springbootemployee.service;
 
 import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.domain.Employee;
+import com.rest.springbootemployee.exception.NotFoundException;
 import com.rest.springbootemployee.repository.CompanyRepository;
 import com.rest.springbootemployee.repository.JpaCompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -26,9 +28,9 @@ public class CompanyService {
         companyRepository.deleteAll();
     }
 
-//    public Company findById(int id) {
-//        return companyRepository.findById(id);
-//    }
+    public Company findById(int id) {
+        return Optional.ofNullable(companyRepository.findById(id)).orElseThrow(NotFoundException::new);
+    }
 //
 //    public List<Employee> findEmployeesUnderCertainCompany(int id) {
 //        return companyRepository.findEmployeesUnderCertainCompany(id);
