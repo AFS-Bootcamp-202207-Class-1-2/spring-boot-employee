@@ -36,17 +36,21 @@ public class EmployControllerTest {
     @Autowired
     JpaCompanyRepository companyRepository;
 
+    private int companyId;
+
     @BeforeEach
     void clearDB() {
         employeeService.deleteAll();
         companyRepository.deleteAll();
+        Company company = companyRepository.save(new Company(1, "hauwei", new ArrayList<>()));
+        companyId = company.getId();
     }
 
     @Test
     void should_get_all_employees_when_perform_get_given_employees() throws Exception {
         //given
-        Company company = companyRepository.save(new Company(1, "hauwei", new ArrayList<>()));
-        employeeService.addEmployee(new Employee(1, "Lisa", 29, "female", 9000, company.getId()));
+
+        employeeService.addEmployee(new Employee(1, "Lisa", 29, "female", 9000, companyId));
         //when & then
         client.perform(MockMvcRequestBuilders.get("/employees"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
