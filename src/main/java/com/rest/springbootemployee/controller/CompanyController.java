@@ -31,18 +31,18 @@ public class CompanyController {
     public List<Employee> getEmployeesUnderCertainCompany(@PathVariable int id) {
         return companyService.findEmployeesUnderCertainCompany(id);
     }
-//
-//    @GetMapping(params = {"page", "pageSize"})
-//    public List<Company> getCompanyByPageAndPageSize(@RequestParam int page, @RequestParam int pageSize) {
-//        return companyService.findCompanyByPageAndPageSize(page, pageSize);
-//    }
-//
-//    @PostMapping()
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Company createCompany(@RequestBody Company company) {
-//        return companyService.createCompany(company);
-//    }
-//
+
+    @GetMapping(params = {"page", "pageSize"})
+    public List<Company> getCompanyByPageAndPageSize(@RequestParam int page, @RequestParam int pageSize) {
+        return companyService.findCompanyByPageAndPageSize(page, pageSize);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public Company createCompany(@RequestBody Company company) {
+        return companyService.createCompany(company);
+    }
+
 //    @PutMapping("/{id}")
 //    public Company updateCompany(@PathVariable int id, @RequestBody Company company) {
 //        return companyService.updateCompanyById(id, company);

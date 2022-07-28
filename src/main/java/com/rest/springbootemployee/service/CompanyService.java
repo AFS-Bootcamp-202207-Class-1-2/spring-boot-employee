@@ -43,10 +43,10 @@ public class CompanyService {
         return companyRepository.findAll(pageable).toList();
     }
 
-//    public Company createCompany(Company company) {
-//        return companyRepository.createCompany(company);
-//    }
-//
+    public Company createCompany(Company company) {
+        return companyRepository.save(company);
+    }
+
 //    public Company updateCompanyById(int id, Company updateCompany) {
 //        return companyRepository.updateCompanyById(id, updateCompany);
 //    }
