@@ -16,7 +16,7 @@ public class Company {
 
     @OneToMany(targetEntity = Employee.class)
     @JoinColumn(name = "companyId")
-    private List<Employee> employees = new ArrayList<>();
+    private List<Employee> employees;
 
 
     public Company(int id, String name, List<Employee> employees) {
