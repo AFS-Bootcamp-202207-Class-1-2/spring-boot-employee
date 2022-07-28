@@ -31,11 +31,11 @@ public class CompanyService {
     public Company findById(int id) {
         return Optional.ofNullable(companyRepository.findById(id)).orElseThrow(NotFoundException::new);
     }
-//
-//    public List<Employee> findEmployeesUnderCertainCompany(int id) {
-//        return companyRepository.findEmployeesUnderCertainCompany(id);
-//    }
-//
+
+    public List<Employee> findEmployeesUnderCertainCompany(int id) {
+        return findById(id).getEmployees();
+    }
+
 //    public List<Company> findCompanyByPageAndPageSize(int page, int pageSize) {
 //        return companyRepository.findCompanyByPageAndPageSize(page, pageSize);
 //    }

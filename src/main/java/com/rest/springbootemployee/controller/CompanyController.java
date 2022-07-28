@@ -26,11 +26,11 @@ public class CompanyController {
     public Company getCompanyById(@PathVariable int id) {
         return companyService.findById(id);
     }
-//
-//    @GetMapping("/{id}/employees")
-//    public List<Employee> getEmployeesUnderCertainCompany(@PathVariable int id) {
-//        return companyService.findEmployeesUnderCertainCompany(id);
-//    }
+
+    @GetMapping("/{id}/employees")
+    public List<Employee> getEmployeesUnderCertainCompany(@PathVariable int id) {
+        return companyService.findEmployeesUnderCertainCompany(id);
+    }
 //
 //    @GetMapping(params = {"page", "pageSize"})
 //    public List<Company> getCompanyByPageAndPageSize(@RequestParam int page, @RequestParam int pageSize) {

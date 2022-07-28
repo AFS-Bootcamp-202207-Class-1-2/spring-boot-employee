@@ -67,22 +67,24 @@ public class CompanyServiceTest {
         //then
         assertThat(actualCompany.getId(), equalTo(id));
     }
-//
-//    @Test
-//    void should_return_employees_under_certain_company_when_find_given_id() {
-//        int id = 1;
-//        List<Employee> employees = new ArrayList<>(Arrays.asList(
-//                new Employee(1, "zhangsan", 12, "male", 2532, 1),
-//                new Employee(2, "lisi", 13, "male", 235, 1)));
-//
-//        given(companyRepository.findEmployeesUnderCertainCompany(id)).willReturn(employees);
-//
-//        //when
-//        List<Employee> actualEmployees = companyService.findEmployeesUnderCertainCompany(id);
-//
-//        //then
-//        assertThat(actualEmployees.get(0).getName(), equalTo(employees.get(0).getName()));
-//    }
+
+    @Test
+    void should_return_employees_under_certain_company_when_find_given_id() {
+        int id = 1;
+        Company company = new Company(1, "huawei", new ArrayList<>());
+        List<Employee> employees = new ArrayList<>(Arrays.asList(
+                new Employee(1, "zhangsan", 12, "male", 2532, 1),
+                new Employee(2, "lisi", 13, "male", 235, 1)));
+        company.setEmployees(employees);
+
+        given(companyRepository.findById(id)).willReturn(company);
+
+        //when
+        List<Employee> actualEmployees = companyService.findEmployeesUnderCertainCompany(id);
+
+        //then
+        assertThat(actualEmployees.get(0).getName(), equalTo(employees.get(0).getName()));
+    }
 //
 //    @Test
 //    void should_return_companies_when_find_given_page_and_page_size() {
