@@ -43,9 +43,9 @@ public class EmployeeService {
 //        return employeeRepository.findEmployeeByPage(page, pageSize);
 //    }
 //
-//    public Employee updateEmployee(int id, Employee updateEmployee) {
-//        return employeeRepository.updateEmployee(id, updateEmployee);
-//    }
+    public Employee updateEmployee(Employee updateEmployee) {
+        return employeeRepository.save(updateEmployee);
+    }
 //
 //    public void deleteEmployee(int id) {
 //        employeeRepository.deleteEmployee(id);

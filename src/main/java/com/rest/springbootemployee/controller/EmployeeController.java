@@ -36,11 +36,11 @@ public class EmployeeController {
     public Employee addEmployee(@RequestBody Employee employee) {
         return employeeService.addEmployee(employee);
     }
-//
-//    @PutMapping("/{id}")
-//    public Employee updateEmployeesById(@PathVariable int id, @RequestBody Employee employee) {
-//        return employeeService.updateEmployee(id, employee);
-//    }
+
+    @PutMapping()
+    public Employee updateEmployeesById(@RequestBody Employee employee) {
+        return employeeService.updateEmployee(employee);
+    }
 //
 //    @DeleteMapping("/{id}")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)

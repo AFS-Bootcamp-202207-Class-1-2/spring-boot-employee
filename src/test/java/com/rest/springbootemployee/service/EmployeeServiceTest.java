@@ -133,22 +133,20 @@ public class EmployeeServiceTest {
 //    }
 //
 //
-//    @Test
-//    public void should_return_employee_when_update_given_id_and_employee() {
-//        //given
-//        int id = 1;
-//        Employee employee = new Employee(id, "A", 21, "male", 8000);
-//        Employee updateEmployee = new Employee(id, "A", 21, "male", 10000);
-//
-//        employeeService.addEmployee(employee);
-//
-//        //when
-//        Employee updatedEmployee = employeeService.updateEmployee(id, updateEmployee);
-//
-//        //then
-//        verify(jpaEmployeeRepository).updateEmployee(1, updateEmployee);
-//        assertThat(updatedEmployee.getSalary(), equalTo(updateEmployee.getSalary()));
-//    }
+    @Test
+    public void should_return_employee_when_update_given_id_and_employee() {
+        //given
+        int id = 1;
+        Employee updateEmployee = new Employee(id, "A", 21, "male", 10000);
+
+        given(jpaEmployeeRepository.save(updateEmployee)).willReturn(updateEmployee);
+        //when
+        Employee updatedEmployee = employeeService.updateEmployee(updateEmployee);
+
+        //then
+        verify(jpaEmployeeRepository).save(updateEmployee);
+        assertThat(updatedEmployee.getSalary(), equalTo(updateEmployee.getSalary()));
+    }
 //
 //    @Test
 //    public void should_return_no_content_when_delete_given_id() {
