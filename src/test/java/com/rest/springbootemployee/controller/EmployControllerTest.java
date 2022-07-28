@@ -146,7 +146,7 @@ public class EmployControllerTest {
     @Test
     void should_get_employees_by_page_when_perform_put_given_page_and_page_size() throws Exception {
         //given
-        employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, 1));
+        employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, companyId));
         int page = 1;
         int pageSize = 2;
         //when & then
