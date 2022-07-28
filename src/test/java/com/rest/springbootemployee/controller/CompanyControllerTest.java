@@ -76,21 +76,18 @@ public class CompanyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].salary").value(2532));
 
     }
-//
-//    @Test
-//    void should_get_employees_under_certain_company_when_perform_get_given_id() throws Exception {
-//        //given
-//        companyService.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1)))));
-//        int id = 1;
-//        //when & then
-//        client.perform(MockMvcRequestBuilders.get("/companies/" + id + "/employees"))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("zhangsan"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].age").value(12))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].gender").value("male"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].salary").value(2532));
-//
-//    }
+
+    @Test
+    void should_get_employees_under_certain_company_when_perform_get_given_id() throws Exception {
+        //when & then
+        client.perform(MockMvcRequestBuilders.get("/companies/" + companyId + "/employees"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("zhangsan"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].age").value(12))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].gender").value("male"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].salary").value(2532));
+
+    }
 //
 //    @Test
 //    void should_get_companies_when_perform_get_given_page_and_page_size() throws Exception {
