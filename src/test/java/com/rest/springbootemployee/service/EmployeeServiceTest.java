@@ -2,18 +2,15 @@ package com.rest.springbootemployee.service;
 
 
 import com.rest.springbootemployee.domain.Employee;
-import com.rest.springbootemployee.repository.EmployeeRepository;
 import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -121,7 +118,7 @@ public class EmployeeServiceTest {
         int pageSize = 1;
 
         Page pageOfEmployees = new PageImpl(employeesByPage);
-        given(jpaEmployeeRepository.findByPageAndPageSize(PageRequest.of(page, pageSize))).willReturn(pageOfEmployees);
+        given(jpaEmployeeRepository.findAll(PageRequest.of(page, pageSize))).willReturn(pageOfEmployees);
 
         //when
         List<Employee> actualEmployeesByPage = employeeService.findEmployeeByPage(page, pageSize);

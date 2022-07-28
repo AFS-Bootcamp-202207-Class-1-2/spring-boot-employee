@@ -2,18 +2,13 @@ package com.rest.springbootemployee.service;
 
 import com.rest.springbootemployee.domain.Employee;
 import com.rest.springbootemployee.exception.NotFoundException;
-import com.rest.springbootemployee.repository.EmployeeRepository;
 import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.PushBuilder;
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -43,7 +38,7 @@ public class EmployeeService {
 
     public List<Employee> findEmployeeByPage(int page, int pageSize) {
         PageRequest pageRequest = PageRequest.of(page, pageSize);
-        return employeeRepository.findByPageAndPageSize(pageRequest).toList();
+        return employeeRepository.findAll(pageRequest).toList();
     }
 
     public Employee updateEmployee(Employee updateEmployee) {
@@ -52,5 +47,9 @@ public class EmployeeService {
 
     public void deleteEmployee(int id) {
         employeeRepository.deleteById(id);
+    }
+
+    public void deleteAll(){
+        employeeRepository.deleteAll();
     }
 }
