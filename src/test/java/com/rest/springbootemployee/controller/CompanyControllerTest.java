@@ -37,18 +37,21 @@ public class CompanyControllerTest {
     @Autowired
     EmployeeService employeeService;
 
+    private int companyId;
 
     @BeforeEach
     void DBclear() {
         employeeService.deleteAll();
         companyService.deleteAll();
+        Company company = companyService.createCompany(new Company(1, "huawei", new ArrayList<>()));
+        employeeService.addEmployee(new Employee(1, "zhangsan", 12, "male", 2532, company.getId()));
+        companyId = company.getId();
+
     }
 
     @Test
     void should_get_all_company_when_perform_get_given_companies() throws Exception {
         //given
-        Company company = companyService.createCompany(new Company(1, "huawei", new ArrayList<>()));
-        employeeService.addEmployee(new Employee(1, "zhangsan", 12, "male", 2532, company.getId()));
         //when & then
         client.perform(MockMvcRequestBuilders.get("/companies"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -61,21 +64,18 @@ public class CompanyControllerTest {
     }
 
 
-//    @Test
-//    void should_get_company_when_perform_get_given_id() throws Exception {
-//        //given
-//        companyService.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1)))));
-//        int id = 1;
-//        //when & then
-//        client.perform(MockMvcRequestBuilders.get("/companies/" + id))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("huawei"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].name").value("zhangsan"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].gender").value("male"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].salary").value(2532));
-//
-//    }
+    @Test
+    void should_get_company_when_perform_get_given_id() throws Exception {
+        //when & then
+        client.perform(MockMvcRequestBuilders.get("/companies/" + companyId))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(companyId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("huawei"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].name").value("zhangsan"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].gender").value("male"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].salary").value(2532));
+
+    }
 //
 //    @Test
 //    void should_get_employees_under_certain_company_when_perform_get_given_id() throws Exception {
