@@ -104,41 +104,22 @@ public class CompanyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].employees[0].salary").value(2532));
 
     }
-//
-//    @Test
-//    void should_add_companies_when_perform_post_given_page_and_page_size() throws Exception {
-//        //given
-//        String company = "{\n" +
-//                "        \"id\": 1,\n" +
-//                "        \"name\": \"oracle\",\n" +
-//                "        \"employees\": [\n" +
-//                "            {\n" +
-//                "                \"id\": 5,\n" +
-//                "                \"name\": \"xing\",\n" +
-//                "                \"age\": 23,\n" +
-//                "                \"gender\": \"female\",\n" +
-//                "                \"salary\": 9000\n" +
-//                "            },\n" +
-//                "            {\n" +
-//                "                \"id\": 6,\n" +
-//                "                \"name\": \"liang\",\n" +
-//                "                \"age\": 22,\n" +
-//                "                \"gender\": \"female\",\n" +
-//                "                \"salary\": 10000\n" +
-//                "            }\n" +
-//                "        ]\n" +
-//                "    }";
-//        //when & then
-//        client.perform(MockMvcRequestBuilders.post("/companies")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(company))
-//                .andExpect(MockMvcResultMatchers.status().isCreated())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("oracle"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].name").value("xing"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].gender").value("female"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].salary").value(9000));
-//    }
+
+    @Test
+    void should_add_companies_when_perform_post_given_company() throws Exception {
+        //given
+        String company = "{\n" +
+                "        \"id\": 1,\n" +
+                "        \"name\": \"oracle\"\n" +
+                "    }";
+        //when & then
+        client.perform(MockMvcRequestBuilders.post("/companies")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(company))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(companyId + 1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("oracle"));
+    }
 //
 //
 //    @Test
