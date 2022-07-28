@@ -56,33 +56,33 @@ public class EmployControllerTest {
 
 
 
-//    @Test
-//    void should_create_new_employee_when_perform_post_given_new_employee() throws Exception {
-//        //given
-//        String newEmployee = "{\n" +
-//                "\"id\": 2, \n" +
-//                "\"name\": \"Lisa\", \n" +
-//                "\"age\": 21, \n" +
-//                "\"gender\": \"female\", \n" +
-//                "\"salary\": 6000\n" +
-//                "}";
-//        //when & then
-//        client.perform(MockMvcRequestBuilders.post("/employees")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(newEmployee))
-//                .andExpect(MockMvcResultMatchers.status().isCreated())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Lisa"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(21))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value("female"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(6000));
-//        //then
-//        List<Employee> employees = employeeService.findAll();
-//        assertThat(employees, hasSize(1));
-//        assertThat(employees.get(0).getName(), equalTo("Lisa"));
-//        assertThat(employees.get(0).getAge(), equalTo(21));
-//        assertThat(employees.get(0).getGender(), equalTo("female"));
-//        assertThat(employees.get(0).getSalary(), equalTo(6000));
-//    }
+    @Test
+    void should_create_new_employee_when_perform_post_given_new_employee() throws Exception {
+        //given
+        String newEmployee = "{\n" +
+                "\"id\": 2, \n" +
+                "\"name\": \"Lisa\", \n" +
+                "\"age\": 21, \n" +
+                "\"gender\": \"female\", \n" +
+                "\"salary\": 6000\n" +
+                "}";
+        //when & then
+        client.perform(MockMvcRequestBuilders.post("/employees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newEmployee))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Lisa"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(21))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value("female"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(6000));
+        //then
+        List<Employee> employees = employeeService.findAll();
+        assertThat(employees, hasSize(1));
+        assertThat(employees.get(0).getName(), equalTo("Lisa"));
+        assertThat(employees.get(0).getAge(), equalTo(21));
+        assertThat(employees.get(0).getGender(), equalTo("female"));
+        assertThat(employees.get(0).getSalary(), equalTo(6000));
+    }
 //
 //    @Test
 //    void should_update_employee_when_perform_put_given_new_employee_and_id() throws Exception {
