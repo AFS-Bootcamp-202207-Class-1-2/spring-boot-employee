@@ -120,50 +120,23 @@ public class CompanyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(companyId + 1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("oracle"));
     }
-//
-//
-//    @Test
-//    void should_update_companies_when_perform_put_given_company_and_id() throws Exception {
-//        //given
-//        int id = 1;
-//        Company originCompany = new Company(id, "oracle", new ArrayList<>(Arrays.asList(
-//                new Employee(5, "xing", 23, "female", 1000, 1),
-//                new Employee(6, "liang", 22, "female", 10000, 1)
-//        )));
-//
-//        companyService.createCompany(originCompany);
-//
-//        String company = "{\n" +
-//                "        \"id\": " + id + ",\n" +
-//                "        \"name\": \"oracle\",\n" +
-//                "        \"employees\": [\n" +
-//                "            {\n" +
-//                "                \"id\": 5,\n" +
-//                "                \"name\": \"xing\",\n" +
-//                "                \"age\": 23,\n" +
-//                "                \"gender\": \"female\",\n" +
-//                "                \"salary\": 9000\n" +
-//                "            },\n" +
-//                "            {\n" +
-//                "                \"id\": 6,\n" +
-//                "                \"name\": \"liang\",\n" +
-//                "                \"age\": 22,\n" +
-//                "                \"gender\": \"female\",\n" +
-//                "                \"salary\": 10000\n" +
-//                "            }\n" +
-//                "        ]\n" +
-//                "    }";
-//        //when & then
-//        client.perform(MockMvcRequestBuilders.put("/companies/{id}", id)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(company))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("oracle"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].name").value("xing"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].gender").value("female"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].salary").value(9000));
-//    }
+
+
+    @Test
+    void should_update_companies_when_perform_put_given_company_and_id() throws Exception {
+        //given
+        String updateCompany = "{\n" +
+                "        \"id\": " + companyId + ",\n" +
+                "        \"name\": \"oracle\"\n" +
+                "    }";
+        //when & then
+        client.perform(MockMvcRequestBuilders.put("/companies/{id}", companyId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updateCompany))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(companyId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("oracle"));
+    }
 //
 //    @Test
 //    void should_delete_company_when_perform_delete_given_id() throws Exception {
