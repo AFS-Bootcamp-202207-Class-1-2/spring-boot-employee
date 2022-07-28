@@ -74,7 +74,8 @@ public class EmployControllerTest {
                 "\"name\": \"Lisa\", \n" +
                 "\"age\": 21, \n" +
                 "\"gender\": \"female\", \n" +
-                "\"salary\": 6000\n" +
+                "\"salary\": 6000, \n" +
+                "\"companyId\": "+companyId+" \n" +
                 "}";
         //when & then
         client.perform(MockMvcRequestBuilders.post("/employees")
