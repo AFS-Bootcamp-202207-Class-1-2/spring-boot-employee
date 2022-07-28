@@ -98,16 +98,18 @@ public class EmployControllerTest {
     @Test
     void should_update_employee_when_perform_put_given_new_employee_and_id() throws Exception {
         //given
-//        List<Employee> employees = employeeService.findAll();
 
-        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, 1));
+
+
+        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, companyId));
         int id = employee.getId();
         String newEmployee = "{\n" +
                 "            \"id\": "+id+",\n" +
                 "            \"name\": \"li\",\n" +
                 "            \"age\": 20,\n" +
                 "            \"gender\": \"female\",\n" +
-                "            \"salary\": 5000\n" +
+                "            \"salary\": 5000, \n" +
+                "            \"companyId\": "+companyId+" \n" +
                 "        }";
         //when & then
         client.perform(MockMvcRequestBuilders.put("/employees")
