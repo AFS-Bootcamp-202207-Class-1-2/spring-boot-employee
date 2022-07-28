@@ -5,6 +5,7 @@ import com.rest.springbootemployee.domain.Employee;
 import com.rest.springbootemployee.exception.NotFoundException;
 import com.rest.springbootemployee.repository.CompanyRepository;
 import com.rest.springbootemployee.repository.JpaCompanyRepository;
+import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,12 @@ import java.util.Optional;
 @Service
 public class CompanyService {
 
-//    @Autowired
-//    CompanyRepository companyRepository;
+    @Autowired
+    JpaEmployeeRepository jpaEmployeeRepository;
 
     @Autowired
     JpaCompanyRepository companyRepository;
+
 
     public List<Company> findAll() {
         return companyRepository.findAll();
@@ -54,6 +56,11 @@ public class CompanyService {
     }
 
     public void deleteCompanyById(int id) {
+        Company company = findById(id);
+        List<Employee> employees = company.getEmployees();
+        employees.forEach(employee -> {
+            jpaEmployeeRepository.deleteById(employee.getId());
+        });
         companyRepository.deleteById(id);
     }
 

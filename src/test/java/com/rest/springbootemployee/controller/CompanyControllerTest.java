@@ -137,21 +137,15 @@ public class CompanyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(companyId))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("oracle"));
     }
-//
-//    @Test
-//    void should_delete_company_when_perform_delete_given_id() throws Exception {
-//        //given
-//        List<Company> companies = companyService.findAll();
-//        int id = 1;
-//        Company company = new Company(id, "oracle", new ArrayList<>(Arrays.asList(
-//                new Employee(6, "liang", 22, "female", 10000, 1)
-//        )));
-//        companies.add(company);
-//        //when & then
-//        client.perform(MockMvcRequestBuilders.delete("/companies/{id}", id))
-//                .andExpect(MockMvcResultMatchers.status().isNoContent());
-//
-//        assertThat(companies, hasSize(0));
-//
-//    }
+
+    @Test
+    void should_delete_company_when_perform_delete_given_id() throws Exception {
+
+        //when & then
+        client.perform(MockMvcRequestBuilders.delete("/companies/{id}", companyId))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+        assertThat(companyService.findAll(), hasSize(0));
+
+    }
 }
