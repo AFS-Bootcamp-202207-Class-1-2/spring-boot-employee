@@ -31,11 +31,11 @@ public class EmployeeController {
         return employeeService.findEmployeesByGender(gender);
     }
 
-//    @PostMapping()
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Employee addEmployee(@RequestBody Employee employee) {
-//        return employeeService.addEmployee(employee);
-//    }
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee addEmployee(@RequestBody Employee employee) {
+        return employeeService.addEmployee(employee);
+    }
 //
 //    @PutMapping("/{id}")
 //    public Employee updateEmployeesById(@PathVariable int id, @RequestBody Employee employee) {

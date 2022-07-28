@@ -90,20 +90,20 @@ public class EmployeeServiceTest {
         assertThat(actualEmployeesByGender.get(0), equalTo(employeeA));
         assertThat(actualEmployeesByGender.get(1), equalTo(employeeC));
     }
-//
-//    @Test
-//    public void should_return_employee_when_add_given_employee() {
-//        //given
-//        Employee employee = new Employee(1, "A", 21, "male", 8000);
-//        Employee employeeUpdated = new Employee(1, "A", 22, "male", 8000);
-//        given(jpaEmployeeRepository.save(employee)).willReturn(employee);
-//
-//        //when
-//        Employee actualEmployee = employeeService.addEmployee(employee);
-//
-//        //then
-//        assertThat(actualEmployee, equalTo(employee));
-//    }
+
+    @Test
+    public void should_return_employee_when_add_given_employee() {
+        //given
+        Employee employee = new Employee(1, "A", 21, "male", 8000);
+        Employee employeeUpdated = new Employee(1, "A", 22, "male", 8000);
+        given(jpaEmployeeRepository.save(employee)).willReturn(employee);
+
+        //when
+        Employee actualEmployee = employeeService.addEmployee(employee);
+
+        //then
+        assertThat(actualEmployee, equalTo(employee));
+    }
 
 //    @Test
 //    public void should_return_employee_by_page_when_get_given_page_pageSize() {

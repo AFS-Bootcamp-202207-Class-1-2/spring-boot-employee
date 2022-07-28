@@ -32,9 +32,9 @@ public class EmployeeService {
         return employeeRepository.findByGender(gender);
     }
 
-//    public Employee addEmployee(Employee employee) {
-//        return employeeRepository.addEmployee(employee);
-//    }
+    public Employee addEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
 //
 //    public List<Employee> findEmployeeByPage(int page, int pageSize) {
 //        return employeeRepository.findEmployeeByPage(page, pageSize);
