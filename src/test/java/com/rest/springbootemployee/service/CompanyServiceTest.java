@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -85,27 +88,30 @@ public class CompanyServiceTest {
         //then
         assertThat(actualEmployees.get(0).getName(), equalTo(employees.get(0).getName()));
     }
-//
-//    @Test
-//    void should_return_companies_when_find_given_page_and_page_size() {
-//        int page = 1;
-//        int pageSize = 1;
-//
-//        List<Company> companies = new ArrayList<>();
-//        companies.add(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "huang", 23, "male", 8000, 1), new Employee(2, "zhang", 26, "male", 15005, 1)))));
-//        companies.add(new Company(2, "google", new ArrayList<>(Arrays.asList(new Employee(3, "li", 20, "female", 8000, 1), new Employee(4, "qian", 21, "male", 7989, 1)))));
-//        companies.add(new Company(3, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000, 1), new Employee(6, "liang", 22, "female", 10000, 1)))));
-//
-//        given(companyRepository.findCompanyByPageAndPageSize(page, pageSize)).willReturn(companies);
-//
-//        //when
-//        List<Company> actualCompanies = companyService.findCompanyByPageAndPageSize(page, pageSize);
-//
-//        //then
-//        assertThat(actualCompanies.get(0).getName(), equalTo(companies.get(0).getName()));
-//
-//    }
-//
+
+    @Test
+    void should_return_companies_when_find_given_page_and_page_size() {
+        int page = 1;
+        int pageSize = 1;
+
+        List<Company> companiesByPage = new ArrayList<>();
+        companiesByPage.add(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "huang", 23, "male", 8000, 1), new Employee(2, "zhang", 26, "male", 15005, 1)))));
+        companiesByPage.add(new Company(2, "google", new ArrayList<>(Arrays.asList(new Employee(3, "li", 20, "female", 8000, 1), new Employee(4, "qian", 21, "male", 7989, 1)))));
+        companiesByPage.add(new Company(3, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000, 1), new Employee(6, "liang", 22, "female", 10000, 1)))));
+
+
+
+        Page pageOfEmployees = new PageImpl(companiesByPage);
+        given(companyRepository.findAll(PageRequest.of(page, pageSize))).willReturn(pageOfEmployees);
+
+        //when
+        List<Company> actualCompanies = companyService.findCompanyByPageAndPageSize(page, pageSize);
+
+        //then
+        assertThat(actualCompanies.get(0).getName(), equalTo(companiesByPage.get(0).getName()));
+
+    }
+
 //    @Test
 //    void should_return_company_when_add_given_company() {
 //

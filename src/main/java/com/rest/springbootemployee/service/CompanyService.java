@@ -6,8 +6,10 @@ import com.rest.springbootemployee.exception.NotFoundException;
 import com.rest.springbootemployee.repository.CompanyRepository;
 import com.rest.springbootemployee.repository.JpaCompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,10 +38,11 @@ public class CompanyService {
         return findById(id).getEmployees();
     }
 
-//    public List<Company> findCompanyByPageAndPageSize(int page, int pageSize) {
-//        return companyRepository.findCompanyByPageAndPageSize(page, pageSize);
-//    }
-//
+    public List<Company> findCompanyByPageAndPageSize(int page, int pageSize) {
+        PageRequest pageable = PageRequest.of(page, pageSize);
+        return companyRepository.findAll(pageable).toList();
+    }
+
 //    public Company createCompany(Company company) {
 //        return companyRepository.createCompany(company);
 //    }
