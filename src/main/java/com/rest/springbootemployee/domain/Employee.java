@@ -20,12 +20,23 @@ public class Employee {
     @Column(name = "salary")
     private int salary;
 
+    private int companyId;
+
     public Employee(int id, String name, int age, String gender, int salary) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.salary = salary;
+    }
+
+    public Employee(int id, String name, int age, String gender, int salary, int companyId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.salary = salary;
+        this.companyId = companyId;
     }
 
     public Employee() {
@@ -73,6 +84,14 @@ public class Employee {
 
     public void merge(Employee employee) {
         this.salary = employee.getSalary();
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     @Override
