@@ -22,9 +22,10 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-//    public Employee findEmployeeById(int id) {
-//        return employeeRepository.findEmployeeById(id);
-//    }
+
+    public Employee findEmployeeById(int id) {
+        return employeeRepository.findById(id);
+    }
 //
 //    public List<Employee> findEmployeesByGender(String gender) {
 //        return employeeRepository.findAll().stream()

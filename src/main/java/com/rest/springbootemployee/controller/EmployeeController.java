@@ -21,10 +21,10 @@ public class EmployeeController {
         return employeeService.findAll();
     }
 
-//    @GetMapping("/{id}")
-//    public Employee findEmployeeById(@PathVariable int id) {
-//        return employeeService.findEmployeeById(id);
-//    }
+    @GetMapping("/{id}")
+    public Employee findEmployeeById(@PathVariable int id) {
+        return employeeService.findEmployeeById(id);
+    }
 //
 //    @GetMapping(params = "gender")
 //    public List<Employee> findEmployeeByGender(@RequestParam String gender) {

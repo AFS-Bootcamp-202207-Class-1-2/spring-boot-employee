@@ -24,11 +24,9 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 public class EmployeeServiceTest {
-//    @Mock
-//    @Spy
-//    EmployeeRepository employeeRepository;
 
-    @Spy
+//    @Spy
+    @Mock
     JpaEmployeeRepository jpaEmployeeRepository;
 
     @InjectMocks
@@ -36,8 +34,7 @@ public class EmployeeServiceTest {
 
     @BeforeEach
     void clear(){
-//        employeeRepository.clearAll();
-
+        jpaEmployeeRepository.deleteAll();
     }
 
     @Test
@@ -56,19 +53,19 @@ public class EmployeeServiceTest {
         assertThat(actualEmployees.get(0), equalTo(employee));
     }
 
-//    @Test
-//    public void should_return_employee_when_find_given_id() {
-//        //given
-//        int id = 1;
-//        Employee employee = new Employee(id, "A", 21, "male", 8000);
-//        jpaEmployeeRepository.save(employee);
-//
-//        //when
-//        Employee employeeById = employeeService.findEmployeeById(id);
-//
-//        //then
-//        assertThat(employeeById, equalTo(employee));
-//    }
+    @Test
+    public void should_return_employee_when_find_given_id() {
+        //given
+        int id = 1;
+        Employee employee = new Employee(id, "A", 21, "male", 8000);
+
+        given(jpaEmployeeRepository.findById(id)).willReturn(employee);
+        //when
+        Employee employeeById = employeeService.findEmployeeById(id);
+
+        //then
+        assertThat(employeeById, equalTo(employee));
+    }
 //
 //    @Test
 //    public void should_return_employee_when_find_given_gender() {
