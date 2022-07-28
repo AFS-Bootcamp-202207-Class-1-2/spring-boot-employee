@@ -26,13 +26,12 @@ public class EmployeeService {
     public Employee findEmployeeById(int id) {
         return employeeRepository.findById(id);
     }
-//
-//    public List<Employee> findEmployeesByGender(String gender) {
-//        return employeeRepository.findAll().stream()
-//                .filter(employee -> employee.getGender().equals(gender))
-//                .collect(Collectors.toList());
-//    }
-//
+
+
+    public List<Employee> findEmployeesByGender(String gender) {
+        return employeeRepository.findByGender(gender);
+    }
+
 //    public Employee addEmployee(Employee employee) {
 //        return employeeRepository.addEmployee(employee);
 //    }

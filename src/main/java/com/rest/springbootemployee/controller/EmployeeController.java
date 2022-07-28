@@ -25,12 +25,12 @@ public class EmployeeController {
     public Employee findEmployeeById(@PathVariable int id) {
         return employeeService.findEmployeeById(id);
     }
-//
-//    @GetMapping(params = "gender")
-//    public List<Employee> findEmployeeByGender(@RequestParam String gender) {
-//        return employeeService.findEmployeesByGender(gender);
-//    }
-//
+
+    @GetMapping(params = "gender")
+    public List<Employee> findEmployeeByGender(@RequestParam String gender) {
+        return employeeService.findEmployeesByGender(gender);
+    }
+
 //    @PostMapping()
 //    @ResponseStatus(HttpStatus.CREATED)
 //    public Employee addEmployee(@RequestBody Employee employee) {

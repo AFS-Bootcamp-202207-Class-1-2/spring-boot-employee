@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -66,27 +67,29 @@ public class EmployeeServiceTest {
         //then
         assertThat(employeeById, equalTo(employee));
     }
-//
-//    @Test
-//    public void should_return_employee_when_find_given_gender() {
-//        //given
-//        Employee employeeA = new Employee(1, "A", 21, "male", 8000);
-//        Employee employeeB = new Employee(1, "A", 21, "female", 8000);
-//        Employee employeeC = new Employee(1, "A", 21, "male", 8000);
-//        List<Employee> employees = new ArrayList<>();
-//        employees.add(employeeA);
-//        employees.add(employeeB);
-//        employees.add(employeeC);
-//        String gender = "male";
-//        given(jpaEmployeeRepository.findAll()).willReturn(employees);
-//
-//        //when
-//        List<Employee> employeesByGender = employeeService.findEmployeesByGender(gender);
-//
-//        //then
-//        assertThat(employeesByGender.get(0), equalTo(employeeA));
-//        assertThat(employeesByGender.get(1), equalTo(employeeC));
-//    }
+
+    @Test
+    public void should_return_employee_when_find_given_gender() {
+        //given
+        Employee employeeA = new Employee(1, "A", 21, "male", 8000);
+        Employee employeeB = new Employee(1, "A", 21, "female", 8000);
+        Employee employeeC = new Employee(1, "A", 21, "male", 8000);
+        List<Employee> employees = new ArrayList<>();
+        employees.add(employeeA);
+        employees.add(employeeB);
+        employees.add(employeeC);
+        String gender = "male";
+
+        List<Employee> employeesByGender = new ArrayList<>(Arrays.asList(employeeA, employeeC));
+        given(jpaEmployeeRepository.findByGender(gender)).willReturn(employeesByGender);
+
+        //when
+        List<Employee> actualEmployeesByGender = employeeService.findEmployeesByGender(gender);
+
+        //then
+        assertThat(actualEmployeesByGender.get(0), equalTo(employeeA));
+        assertThat(actualEmployeesByGender.get(1), equalTo(employeeC));
+    }
 //
 //    @Test
 //    public void should_return_employee_when_add_given_employee() {
