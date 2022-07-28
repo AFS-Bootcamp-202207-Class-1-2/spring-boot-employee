@@ -52,9 +52,9 @@ public class CompanyService {
         return companyRepository.save(updateCompany);
     }
 
-//    public void deleteCompanyById(int id) {
-//        companyRepository.deleteCompanyById(id);
-//    }
-//
+    public void deleteCompanyById(int id) {
+        companyRepository.deleteById(id);
+    }
+
 
 }

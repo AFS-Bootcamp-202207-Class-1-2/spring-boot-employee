@@ -47,10 +47,10 @@ public class CompanyController {
     public Company updateCompany(@PathVariable int id, @RequestBody Company company) {
         return companyService.updateCompanyById(id, company);
     }
-//
-//    @DeleteMapping("/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteCompanyById(@PathVariable int id) {
-//        companyService.deleteCompanyById(id);
-//    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCompanyById(@PathVariable int id) {
+        companyService.deleteCompanyById(id);
+    }
 }

@@ -146,15 +146,15 @@ public class CompanyServiceTest {
         verify(companyRepository).save(updateCompany);
     }
 
-//    @Test
-//    void should_return_no_content_when_delete_given_id() {
-//        //given
-//        int id = 1;
-//
-//        //when
-//        companyService.deleteCompanyById(id);
-//
-//        //then
-//        verify(companyRepository).deleteCompanyById(id);
-//    }
+    @Test
+    void should_return_no_content_when_delete_given_id() {
+        //given
+        int id = 1;
+
+        //when
+        companyService.deleteCompanyById(id);
+
+        //then
+        verify(companyRepository).deleteById(id);
+    }
 }
