@@ -2,8 +2,6 @@ package com.rest.springbootemployee.controller;
 
 
 import com.rest.springbootemployee.domain.Employee;
-import com.rest.springbootemployee.repository.EmployeeRepository;
-import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import com.rest.springbootemployee.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -40,7 +37,7 @@ public class EmployControllerTest {
     @Test
     void should_get_all_employees_when_perform_get_given_employees() throws Exception {
         //given
-        employeeService.addEmployee(new Employee(1, "Lisa", 29, "female", 9000));
+        employeeService.addEmployee(new Employee(1, "Lisa", 29, "female", 9000, 1));
         //when & then
         client.perform(MockMvcRequestBuilders.get("/employees"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -88,7 +85,7 @@ public class EmployControllerTest {
     void should_update_employee_when_perform_put_given_new_employee_and_id() throws Exception {
         //given
 //        List<Employee> employees = employeeService.findAll();
-        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000));
+        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, 1));
         int id = employee.getId();
         String newEmployee = "{\n" +
                 "            \"id\": "+id+",\n" +
@@ -119,7 +116,7 @@ public class EmployControllerTest {
     @Test
     void should_delete_employee_when_perform_put_given_new_employee_and_id() throws Exception {
         //given
-        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000));
+        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, 1));
         int id = employee.getId();
         //when & then
         client.perform(MockMvcRequestBuilders.delete("/employees/" + id))
@@ -132,7 +129,7 @@ public class EmployControllerTest {
     @Test
     void should_get_employees_by_page_when_perform_put_given_page_and_page_size() throws Exception {
         //given
-        employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000));
+        employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, 1));
         int page = 1;
         int pageSize = 2;
         //when & then

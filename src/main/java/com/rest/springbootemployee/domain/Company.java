@@ -25,6 +25,11 @@ public class Company {
         this.employees = employees;
     }
 
+    public Company(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Company() {
     }
 

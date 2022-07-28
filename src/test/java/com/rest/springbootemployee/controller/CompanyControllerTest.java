@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -19,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 
 @SpringBootTest
@@ -41,7 +39,7 @@ public class CompanyControllerTest {
     @Test
     void should_get_all_company_when_perform_get_given_companies() throws Exception {
         //given
-        companyRepository.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532)))));
+        companyRepository.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1)))));
         //when & then
         client.perform(MockMvcRequestBuilders.get("/companies"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -57,7 +55,7 @@ public class CompanyControllerTest {
     @Test
     void should_get_company_when_perform_get_given_id() throws Exception {
         //given
-        companyRepository.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532)))));
+        companyRepository.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1)))));
         int id = 1;
         //when & then
         client.perform(MockMvcRequestBuilders.get("/companies/" + id))
@@ -73,7 +71,7 @@ public class CompanyControllerTest {
     @Test
     void should_get_employees_under_certain_company_when_perform_get_given_id() throws Exception {
         //given
-        companyRepository.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532)))));
+        companyRepository.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1)))));
         int id = 1;
         //when & then
         client.perform(MockMvcRequestBuilders.get("/companies/" + id + "/employees"))
@@ -88,7 +86,7 @@ public class CompanyControllerTest {
     @Test
     void should_get_companies_when_perform_get_given_page_and_page_size() throws Exception {
         //given
-        companyRepository.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532)))));
+        companyRepository.createCompany(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1)))));
         int page = 1;
         int pageSize = 1;
         //when & then
@@ -143,8 +141,8 @@ public class CompanyControllerTest {
         //given
         int id = 1;
         Company originCompany = new Company(id, "oracle", new ArrayList<>(Arrays.asList(
-                new Employee(5, "xing", 23, "female", 1000),
-                new Employee(6, "liang", 22, "female", 10000)
+                new Employee(5, "xing", 23, "female", 1000, 1),
+                new Employee(6, "liang", 22, "female", 10000, 1)
         )));
 
         companyRepository.createCompany(originCompany);
@@ -187,7 +185,7 @@ public class CompanyControllerTest {
         List<Company> companies = companyRepository.findAll();
         int id = 1;
         Company company = new Company(id, "oracle", new ArrayList<>(Arrays.asList(
-                new Employee(6, "liang", 22, "female", 10000)
+                new Employee(6, "liang", 22, "female", 10000, 1)
         )));
         companies.add(company);
         //when & then

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class CompanyServiceTest {
 
     @Test
     void should_return_all_companies_when_find_all_given_companies() {
-        Company company = new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532))));
+        Company company = new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1))));
 
         List<Company> companies = new ArrayList<>();
         companies.add(company);
@@ -57,7 +56,7 @@ public class CompanyServiceTest {
     @Test
     void should_return_company_when_find_given_id() {
         int id = 1;
-        Company company = new Company(id, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532))));
+        Company company = new Company(id, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "zhangsan", 12, "male", 2532, 1))));
 
         given(companyRepository.findById(id)).willReturn(company);
 
@@ -72,8 +71,8 @@ public class CompanyServiceTest {
     void should_return_employees_under_certain_company_when_find_given_id() {
         int id = 1;
         List<Employee> employees = new ArrayList<>(Arrays.asList(
-                new Employee(1, "zhangsan", 12, "male", 2532),
-                new Employee(2, "lisi", 13, "male", 235)));
+                new Employee(1, "zhangsan", 12, "male", 2532, 1),
+                new Employee(2, "lisi", 13, "male", 235, 1)));
 
         given(companyRepository.findEmployeesUnderCertainCompany(id)).willReturn(employees);
 
@@ -90,9 +89,9 @@ public class CompanyServiceTest {
         int pageSize = 1;
 
         List<Company> companies = new ArrayList<>();
-        companies.add(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "huang", 23, "male", 8000), new Employee(2, "zhang", 26, "male", 15005)))));
-        companies.add(new Company(2, "google", new ArrayList<>(Arrays.asList(new Employee(3, "li", 20, "female", 8000), new Employee(4, "qian", 21, "male", 7989)))));
-        companies.add(new Company(3, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000), new Employee(6, "liang", 22, "female", 10000)))));
+        companies.add(new Company(1, "huawei", new ArrayList<>(Arrays.asList(new Employee(1, "huang", 23, "male", 8000, 1), new Employee(2, "zhang", 26, "male", 15005, 1)))));
+        companies.add(new Company(2, "google", new ArrayList<>(Arrays.asList(new Employee(3, "li", 20, "female", 8000, 1), new Employee(4, "qian", 21, "male", 7989, 1)))));
+        companies.add(new Company(3, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000, 1), new Employee(6, "liang", 22, "female", 10000, 1)))));
 
         given(companyRepository.findCompanyByPageAndPageSize(page, pageSize)).willReturn(companies);
 
@@ -107,7 +106,7 @@ public class CompanyServiceTest {
     @Test
     void should_return_company_when_add_given_company() {
 
-        Company company = new Company(1, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000), new Employee(6, "liang", 22, "female", 10000))));
+        Company company = new Company(1, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000, 1), new Employee(6, "liang", 22, "female", 10000, 1))));
 
         given(companyRepository.createCompany(company)).willReturn(company);
 
@@ -124,8 +123,8 @@ public class CompanyServiceTest {
     @Test
     void should_return_company_when_update_given_company_and_id() {
         int id = 1;
-        Company originCompany = new Company(id, "google", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000), new Employee(6, "liang", 22, "female", 10000))));
-        Company updateCompany = new Company(id, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000), new Employee(6, "liang", 22, "female", 10000))));
+        Company originCompany = new Company(id, "google", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000, 1), new Employee(6, "liang", 22, "female", 10000, 1))));
+        Company updateCompany = new Company(id, "apple", new ArrayList<>(Arrays.asList(new Employee(5, "xing", 23, "female", 9000, 1), new Employee(6, "liang", 22, "female", 10000, 1))));
 
         given(companyRepository.findById(id)).willReturn(originCompany);
         given(companyRepository.updateCompanyById(id, updateCompany)).willCallRealMethod();

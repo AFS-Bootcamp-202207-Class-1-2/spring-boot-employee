@@ -1,13 +1,16 @@
 package com.rest.springbootemployee.service;
 
 
+import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.domain.Employee;
+import com.rest.springbootemployee.repository.JpaCompanyRepository;
 import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -41,7 +44,7 @@ public class EmployeeServiceTest {
     @Test
     void should_return_all_employees_when_find_all_given_employees() {
         //given
-        Employee employee = new Employee(1, "A", 21, "male", 8000);
+        Employee employee = new Employee(1, "A", 21, "male", 8000, 1);
         List<Employee> employees = new ArrayList<>();
         employees.add(employee);
         given(jpaEmployeeRepository.findAll()).willReturn(employees);
@@ -58,7 +61,7 @@ public class EmployeeServiceTest {
     public void should_return_employee_when_find_given_id() {
         //given
         int id = 1;
-        Employee employee = new Employee(id, "A", 21, "male", 8000);
+        Employee employee = new Employee(id, "A", 21, "male", 8000, 1);
 
         given(jpaEmployeeRepository.findById(id)).willReturn(employee);
         //when
@@ -71,9 +74,9 @@ public class EmployeeServiceTest {
     @Test
     public void should_return_employee_when_find_given_gender() {
         //given
-        Employee employeeA = new Employee(1, "A", 21, "male", 8000);
-        Employee employeeB = new Employee(1, "A", 21, "female", 8000);
-        Employee employeeC = new Employee(1, "A", 21, "male", 8000);
+        Employee employeeA = new Employee(1, "A", 21, "male", 8000, 1);
+        Employee employeeB = new Employee(1, "A", 21, "female", 8000, 1);
+        Employee employeeC = new Employee(1, "A", 21, "male", 8000, 1);
         List<Employee> employees = new ArrayList<>();
         employees.add(employeeA);
         employees.add(employeeB);
@@ -94,8 +97,8 @@ public class EmployeeServiceTest {
     @Test
     public void should_return_employee_when_add_given_employee() {
         //given
-        Employee employee = new Employee(1, "A", 21, "male", 8000);
-        Employee employeeUpdated = new Employee(1, "A", 22, "male", 8000);
+        Employee employee = new Employee(1, "A", 21, "male", 8000, 1);
+        Employee employeeUpdated = new Employee(1, "A", 22, "male", 8000, 1);
         given(jpaEmployeeRepository.save(employee)).willReturn(employee);
 
         //when
@@ -108,8 +111,8 @@ public class EmployeeServiceTest {
     @Test
     public void should_return_employee_by_page_when_get_given_page_pageSize() {
         //given
-        Employee employeeA = new Employee(1, "A", 21, "male", 8000);
-        Employee employeeC = new Employee(1, "A", 21, "male", 8000);
+        Employee employeeA = new Employee(1, "A", 21, "male", 8000, 1);
+        Employee employeeC = new Employee(1, "A", 21, "male", 8000, 1);
 
         List<Employee> employeesByPage = new ArrayList<>();
         employeesByPage.add(employeeA);
@@ -133,8 +136,9 @@ public class EmployeeServiceTest {
     public void should_return_employee_when_update_given_id_and_employee() {
         //given
         int id = 1;
-        Employee updateEmployee = new Employee(id, "A", 21, "male", 10000);
+        Employee updateEmployee = new Employee(id, "A", 21, "male", 10000, 1);
 
+        given(jpaEmployeeRepository.findById(id)).willReturn(updateEmployee);
         given(jpaEmployeeRepository.save(updateEmployee)).willReturn(updateEmployee);
         //when
         Employee updatedEmployee = employeeService.updateEmployee(updateEmployee);
