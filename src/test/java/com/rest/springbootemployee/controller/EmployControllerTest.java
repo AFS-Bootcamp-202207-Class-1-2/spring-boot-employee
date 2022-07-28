@@ -128,29 +128,28 @@ public class EmployControllerTest {
         assertThat(employeeService.findAll(), hasSize(0));
 
     }
-//
-//    @Test
-//    void should_get_employees_by_page_when_perform_put_given_page_and_page_size() throws Exception {
-//        //given
-//        List<Employee> employees = employeeService.findAll();
-//        employees.add(new Employee(1, "Lisa", 21, "female", 6000));
-//        int page = 1;
-//        int pageSize = 2;
-//        //when & then
-//        client.perform(MockMvcRequestBuilders.get("/employees", page, pageSize))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(1)))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name", equalTo("Lisa")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].age", equalTo(21)))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].gender", equalTo("female")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].salary", equalTo(6000)));
-//
-//        assertThat(employees, hasSize(1));
-//        assertThat(employees.get(0).getName(), equalTo("Lisa"));
-//        assertThat(employees.get(0).getAge(), equalTo(21));
-//        assertThat(employees.get(0).getGender(), equalTo("female"));
-//        assertThat(employees.get(0).getSalary(), equalTo(6000));
-//
-//    }
+
+    @Test
+    void should_get_employees_by_page_when_perform_put_given_page_and_page_size() throws Exception {
+        //given
+        employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000));
+        int page = 1;
+        int pageSize = 2;
+        //when & then
+        client.perform(MockMvcRequestBuilders.get("/employees", page, pageSize))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name", equalTo("Lisa")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].age", equalTo(21)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].gender", equalTo("female")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].salary", equalTo(6000)));
+
+        assertThat(employeeService.findAll(), hasSize(1));
+        assertThat(employeeService.findAll().get(0).getName(), equalTo("Lisa"));
+        assertThat(employeeService.findAll().get(0).getAge(), equalTo(21));
+        assertThat(employeeService.findAll().get(0).getGender(), equalTo("female"));
+        assertThat(employeeService.findAll().get(0).getSalary(), equalTo(6000));
+
+    }
 
 }
