@@ -133,7 +133,7 @@ public class EmployControllerTest {
     @Test
     void should_delete_employee_when_perform_put_given_new_employee_and_id() throws Exception {
         //given
-        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, 1));
+        Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, companyId));
         int id = employee.getId();
         //when & then
         client.perform(MockMvcRequestBuilders.delete("/employees/" + id))
