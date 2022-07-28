@@ -1,7 +1,10 @@
 package com.rest.springbootemployee.controller;
 
 
+import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.domain.Employee;
+import com.rest.springbootemployee.repository.CompanyRepository;
+import com.rest.springbootemployee.repository.JpaCompanyRepository;
 import com.rest.springbootemployee.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,15 +33,20 @@ public class EmployControllerTest {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    JpaCompanyRepository companyRepository;
+
     @BeforeEach
     void clearDB() {
         employeeService.deleteAll();
+        companyRepository.deleteAll();
     }
 
     @Test
     void should_get_all_employees_when_perform_get_given_employees() throws Exception {
         //given
-        employeeService.addEmployee(new Employee(1, "Lisa", 29, "female", 9000, 1));
+        Company company = companyRepository.save(new Company(1, "hauwei", new ArrayList<>()));
+        employeeService.addEmployee(new Employee(1, "Lisa", 29, "female", 9000, company.getId()));
         //when & then
         client.perform(MockMvcRequestBuilders.get("/employees"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -85,6 +94,7 @@ public class EmployControllerTest {
     void should_update_employee_when_perform_put_given_new_employee_and_id() throws Exception {
         //given
 //        List<Employee> employees = employeeService.findAll();
+
         Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, 1));
         int id = employee.getId();
         String newEmployee = "{\n" +
