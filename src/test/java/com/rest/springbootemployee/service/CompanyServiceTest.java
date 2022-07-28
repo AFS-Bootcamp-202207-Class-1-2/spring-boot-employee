@@ -150,6 +150,7 @@ public class CompanyServiceTest {
     void should_return_no_content_when_delete_given_id() {
         //given
         int id = 1;
+        given(companyRepository.findById(1)).willReturn(new Company());
 
         //when
         companyService.deleteCompanyById(id);

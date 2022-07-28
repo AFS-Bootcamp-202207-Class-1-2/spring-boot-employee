@@ -58,9 +58,12 @@ public class CompanyService {
     public void deleteCompanyById(int id) {
         Company company = findById(id);
         List<Employee> employees = company.getEmployees();
-        employees.forEach(employee -> {
-            jpaEmployeeRepository.deleteById(employee.getId());
-        });
+        if (employees != null){
+            employees.forEach(employee -> {
+                jpaEmployeeRepository.deleteById(employee.getId());
+            });
+        }
+
         companyRepository.deleteById(id);
     }
 
