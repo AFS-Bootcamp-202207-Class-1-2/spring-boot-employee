@@ -51,7 +51,6 @@ public class CompanyService {
 
     public Company updateCompanyById(int id, Company updateCompany) {
         Company company = companyRepository.findById(id);
-        company = merge(company, updateCompany);
         mergeToUpdate(updateCompany, company);
         return companyRepository.save(updateCompany);
     }
@@ -69,15 +68,7 @@ public class CompanyService {
     }
 
 
-    public Company merge(Company company, Company updateCompany) {
-        company.setId(updateCompany.getId());
-        company.setName(updateCompany.getName());
-        return company;
-    }
-
     public void mergeToUpdate(Company updateCompany, Company company) {
-        updateCompany.setId(company.getId());
-        updateCompany.setName(company.getName());
         updateCompany.setEmployees(company.getEmployees());
     }
 }
