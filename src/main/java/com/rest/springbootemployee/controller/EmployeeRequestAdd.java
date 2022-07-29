@@ -1,9 +1,7 @@
 package com.rest.springbootemployee.controller;
 
-import org.springframework.stereotype.Component;
 
-
-public class EmployeeRequest {
+public class EmployeeRequestAdd {
 
     private String name;
     private Integer age;
@@ -11,10 +9,10 @@ public class EmployeeRequest {
     private Integer salary;
     private Integer companyId;
 
-    public EmployeeRequest() {
+    public EmployeeRequestAdd() {
     }
 
-    public EmployeeRequest(String name, Integer age, String gender, Integer salary, Integer companyId) {
+    public EmployeeRequestAdd(String name, Integer age, String gender, Integer salary, Integer companyId) {
         this.name = name;
         this.age = age;
         this.gender = gender;

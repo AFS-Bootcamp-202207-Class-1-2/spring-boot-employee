@@ -12,8 +12,6 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService {
-//    @Autowired
-//    private EmployeeRepository employeeRepository;
 
     @Autowired
     private JpaEmployeeRepository employeeRepository;
@@ -41,9 +39,14 @@ public class EmployeeService {
         return employeeRepository.findAll(pageRequest).toList();
     }
 
-    public Employee updateEmployee(Employee updateEmployee) {
-        findEmployeeById(updateEmployee.getId());
-        return employeeRepository.save(updateEmployee);
+    public Employee updateEmployeeSalary(Employee updateEmployee) {
+        Employee employeeById = findEmployeeById(updateEmployee.getId());
+        merge(employeeById, updateEmployee);
+        return employeeRepository.save(employeeById);
+    }
+
+    private void merge(Employee employeeById, Employee updateEmployee) {
+        employeeById.setSalary(updateEmployee.getSalary());
     }
 
     public void deleteEmployee(int id) {

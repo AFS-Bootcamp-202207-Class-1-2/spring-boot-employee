@@ -2,7 +2,6 @@ package com.rest.springbootemployee.controller;
 
 import com.rest.springbootemployee.controller.mapper.EmployeeMapper;
 import com.rest.springbootemployee.domain.Employee;
-import com.rest.springbootemployee.repository.EmployeeRepository;
 import com.rest.springbootemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,15 +37,17 @@ public class EmployeeController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeResponse addEmployee(@RequestBody EmployeeRequest employeeRequest) {
-        Employee employee = employeeMapper.requestToEntity(employeeRequest);
+    public EmployeeResponse addEmployee(@RequestBody EmployeeRequestAdd employeeRequestAdd) {
+        Employee employee = employeeMapper.requestToEntity(employeeRequestAdd);
         Employee addEmployee = employeeService.addEmployee(employee);
         return employeeMapper.entityToResponse(addEmployee);
     }
 
     @PutMapping()
-    public Employee updateEmployeesById(@RequestBody Employee employee) {
-        return employeeService.updateEmployee(employee);
+    public EmployeeResponseUpdate updateEmployeesById(@RequestBody EmployeeRequestUpdate employeeRequestUpdate) {
+        Employee employee = employeeMapper.requestToEntity(employeeRequestUpdate);
+        Employee updatedEmployee = employeeService.updateEmployeeSalary(employee);
+        return employeeMapper.entityToResponseUpdate(updatedEmployee);
     }
 
     @DeleteMapping("/{id}")

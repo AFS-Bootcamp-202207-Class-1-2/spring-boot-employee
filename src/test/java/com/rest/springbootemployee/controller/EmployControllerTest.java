@@ -4,7 +4,6 @@ package com.rest.springbootemployee.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.domain.Employee;
-import com.rest.springbootemployee.repository.CompanyRepository;
 import com.rest.springbootemployee.repository.JpaCompanyRepository;
 import com.rest.springbootemployee.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,15 +70,15 @@ public class EmployControllerTest {
     void should_create_new_employee_when_perform_post_given_new_employee() throws Exception {
         //given
 
-        EmployeeRequest employeeRequest = new EmployeeRequest();
-        employeeRequest.setAge(21);
-        employeeRequest.setName("Lisa");
-        employeeRequest.setGender("female");
-        employeeRequest.setSalary(6000);
-        employeeRequest.setCompanyId(companyId);
+        EmployeeRequestAdd employeeRequestAdd = new EmployeeRequestAdd();
+        employeeRequestAdd.setAge(21);
+        employeeRequestAdd.setName("Lisa");
+        employeeRequestAdd.setGender("female");
+        employeeRequestAdd.setSalary(6000);
+        employeeRequestAdd.setCompanyId(companyId);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String employeeString = objectMapper.writeValueAsString(employeeRequest);
+        String employeeString = objectMapper.writeValueAsString(employeeRequestAdd);
 
         //when & then
         client.perform(MockMvcRequestBuilders.post("/employees")
@@ -103,34 +102,24 @@ public class EmployControllerTest {
     void should_update_employee_when_perform_put_given_new_employee_and_id() throws Exception {
         //given
 
-
-
         Employee employee = employeeService.addEmployee(new Employee(1, "Lisa", 21, "female", 6000, companyId));
         int id = employee.getId();
-        String newEmployee = "{\n" +
-                "            \"id\": "+id+",\n" +
-                "            \"name\": \"li\",\n" +
-                "            \"age\": 20,\n" +
-                "            \"gender\": \"female\",\n" +
-                "            \"salary\": 5000, \n" +
-                "            \"companyId\": "+companyId+" \n" +
-                "        }";
+        EmployeeRequestUpdate employeeRequestUpdate = new EmployeeRequestUpdate();
+        employeeRequestUpdate.setId(id);
+        employeeRequestUpdate.setSalary(5000);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String updateEmployeeString = objectMapper.writeValueAsString(employeeRequestUpdate);
         //when & then
         client.perform(MockMvcRequestBuilders.put("/employees")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(newEmployee))
+                        .content(updateEmployeeString))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("li"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(20))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value("female"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(5000));
 
         //then
 
         assertThat(employeeService.findAll(), hasSize(1));
-        assertThat(employeeService.findAll().get(0).getName(), equalTo("li"));
-        assertThat(employeeService.findAll().get(0).getAge(), equalTo(20));
-        assertThat(employeeService.findAll().get(0).getGender(), equalTo("female"));
         assertThat(employeeService.findAll().get(0).getSalary(), equalTo(5000));
     }
 

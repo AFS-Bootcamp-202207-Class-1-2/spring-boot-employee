@@ -1,16 +1,13 @@
 package com.rest.springbootemployee.service;
 
 
-import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.domain.Employee;
-import com.rest.springbootemployee.repository.JpaCompanyRepository;
 import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -141,7 +138,7 @@ public class EmployeeServiceTest {
         given(jpaEmployeeRepository.findById(id)).willReturn(updateEmployee);
         given(jpaEmployeeRepository.save(updateEmployee)).willReturn(updateEmployee);
         //when
-        Employee updatedEmployee = employeeService.updateEmployee(updateEmployee);
+        Employee updatedEmployee = employeeService.updateEmployeeSalary(updateEmployee);
 
         //then
         verify(jpaEmployeeRepository).save(updateEmployee);
