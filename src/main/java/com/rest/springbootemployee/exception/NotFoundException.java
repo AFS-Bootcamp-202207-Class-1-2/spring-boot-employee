@@ -5,4 +5,6 @@ public class NotFoundException extends RuntimeException{
     public String getMessage() {
         return "employee not found";
     }
+
+    // todo
 }

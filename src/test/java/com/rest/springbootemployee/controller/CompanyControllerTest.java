@@ -94,7 +94,7 @@ public class CompanyControllerTest {
     @Test
     void should_get_companies_when_perform_get_given_page_and_page_size() throws Exception {
         //given
-        int page = 1;
+        int page = 0;
         int pageSize = 1;
         //when & then
         client.perform(MockMvcRequestBuilders.get("/companies", page, pageSize))

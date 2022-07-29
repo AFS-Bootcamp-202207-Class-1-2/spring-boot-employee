@@ -1,5 +1,6 @@
 package com.rest.springbootemployee.controller;
 
+import com.rest.springbootemployee.controller.mapper.EmployeeMapper;
 import com.rest.springbootemployee.domain.Employee;
 import com.rest.springbootemployee.repository.EmployeeRepository;
 import com.rest.springbootemployee.service.EmployeeService;
@@ -12,6 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
+
+
+    @Autowired
+    EmployeeMapper employeeMapper;
 
     @Autowired
     private EmployeeService employeeService;
@@ -33,8 +38,10 @@ public class EmployeeController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return employeeService.addEmployee(employee);
+    public EmployeeResponse addEmployee(@RequestBody EmployeeRequest employeeRequest) {
+        Employee employee = employeeMapper.requestToEntity(employeeRequest);
+        Employee addEmployee = employeeService.addEmployee(employee);
+        return employeeMapper.entityToResponse(addEmployee);
     }
 
     @PutMapping()

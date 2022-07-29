@@ -1,6 +1,7 @@
 package com.rest.springbootemployee.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.springbootemployee.domain.Company;
 import com.rest.springbootemployee.domain.Employee;
 import com.rest.springbootemployee.repository.CompanyRepository;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -26,7 +26,6 @@ import static org.hamcrest.Matchers.hasSize;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 public class EmployControllerTest {
 
     @Autowired
@@ -71,23 +70,26 @@ public class EmployControllerTest {
     @Test
     void should_create_new_employee_when_perform_post_given_new_employee() throws Exception {
         //given
-        String newEmployee = "{\n" +
-                "\"id\": 2, \n" +
-                "\"name\": \"Lisa\", \n" +
-                "\"age\": 21, \n" +
-                "\"gender\": \"female\", \n" +
-                "\"salary\": 6000, \n" +
-                "\"companyId\": "+companyId+" \n" +
-                "}";
+
+        EmployeeRequest employeeRequest = new EmployeeRequest();
+        employeeRequest.setAge(21);
+        employeeRequest.setName("Lisa");
+        employeeRequest.setGender("female");
+        employeeRequest.setSalary(6000);
+        employeeRequest.setCompanyId(companyId);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String employeeString = objectMapper.writeValueAsString(employeeRequest);
+
         //when & then
         client.perform(MockMvcRequestBuilders.post("/employees")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(newEmployee))
+                        .content(employeeString))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Lisa"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(21))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value("female"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(6000));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value("female"));
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(6000));
         //then
         List<Employee> employees = employeeService.findAll();
         assertThat(employees, hasSize(1));
